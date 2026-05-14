@@ -42,9 +42,11 @@
 
 <div class="case-body">
 
+  <img src="../../assets/images/wdp-header.png" alt="Watson Data Platform overview" loading="eager" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
+
   <p>Watson Data Platform is IBM's cloud-native environment for industrial-scale data science — a unified product combining metadata cataloging, collaborative projects, data refinery, pipeline development, notebook-based analysis, and machine learning model training. I joined the governance squad in early 2017, focused on the tools that help enterprise teams manage the quality, compliance, and trustworthiness of their data assets.</p>
 
-  <div class="case-placeholder-img">Image — Watson Data Platform overview</div>
+  <img src="../../assets/images/wdp-breakdown-diagram.png" alt="Watson Data Platform capability breakdown" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
 
   <h2>The problem</h2>
 
@@ -75,15 +77,45 @@
 
   <h3>Research &amp; synthesis</h3>
 
-  <p>Our research spanned generative interviews, observations at IBM's Chief Data Officer Summit, Forrester and Gartner analyst reports, and competitive documentation review. A key finding was the emergence of the Chief Data Officer as a critical persona — an executive bridging data infrastructure and business units, managing compliance while unlocking data's value. We mapped the full CDO org structure to understand the spectrum of roles from highly technical to purely business-focused.</p>
+  <img src="../../assets/images/wdp-cdo-summit.png" alt="IBM Chief Data Officer Summit" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:32px;">
 
-  <p>Cross-squad, six design researchers participated in a week-long synthesis workshop to cluster and organize data points across the platform's six capability areas. This gave us a shared model of the problem space before any design work began.</p>
+  <p>Our research spanned generative interviews, observations at IBM's Chief Data Officer Summit, Forrester and Gartner analyst reports, and competitive documentation review. A key finding was the emergence of the Chief Data Officer as a critical persona — an executive bridging data infrastructure and business units, managing compliance while unlocking data's value.</p>
 
-  <div class="case-placeholder-img">Image — Research synthesis workshop</div>
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/wdp-cdo-persona.png" alt="Chief Data Officer persona" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-cdo-staff.png" alt="CDO org structure" loading="lazy" decoding="async">
+  </div>
 
-  <h3>Information architecture</h3>
+  <p>Cross-squad, six design researchers participated in a week-long synthesis workshop to cluster and organize data points across the platform's six capability areas.</p>
 
-  <p>I created user flow diagrams mapping navigation across three core governance tools, developed sitemaps showing hierarchy and platform connections, and ran remote card-sorting activities with sponsor users to prioritize which business term attributes mattered most. This reduced 50+ legacy attributes to a manageable essential set.</p>
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/wdp-workshop-1.png" alt="Research synthesis workshop" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-workshop-2.png" alt="Workshop affinity mapping" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-workshop-3.png" alt="Workshop clustering" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-workshop-4.png" alt="Workshop synthesis" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Information architecture &amp; sketching</h3>
+
+  <img src="../../assets/images/wdp-sketches.png" alt="Governance tool sketches" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:32px;">
+
+  <p>I created user flow diagrams mapping navigation across three core governance tools and developed sitemaps showing hierarchy and platform connections. Remote card-sorting activities with sponsor users helped prioritize which business term attributes mattered most — reducing 50+ legacy attributes to an essential manageable set.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/wdp-flow-1.png" alt="User flow diagram" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-flow-2.png" alt="User flow diagram" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-flow-3.png" alt="User flow diagram" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-flow-4.png" alt="User flow diagram" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Mid-fidelity wireframes</h3>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/wdp-midfi-pm.png" alt="Policy Manager mid-fi wireframes" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-midfi-bg.png" alt="Business Glossary mid-fi wireframes" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-midfi-gd.png" alt="Governance Dashboard mid-fi wireframes" loading="lazy" decoding="async">
+    <img src="../../assets/images/wdp-hills-2.png" alt="Design hills" loading="lazy" decoding="async">
+  </div>
 
   <h2>Three governance tools</h2>
 
@@ -91,23 +123,25 @@
 
   <p>The policy manager lets CDO office staff build complex governance rules without writing code, powered by IBM's policy enforcement engine. I designed around the full lifecycle of a policy — draft, active, archive — and explored how rules nest within policies and categories, giving governance teams a path from static documentation to active enforcement.</p>
 
-  <div class="case-placeholder-img">Image — Policy Manager interface</div>
+  <img src="../../assets/images/wdp-rule-animation.gif" alt="Policy rule builder interaction" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
 
   <h3>Business glossary</h3>
 
-  <p>The business glossary connects business terminology to the technical metadata in dataset columns. By surfacing business context upfront, data scientists no longer need to decipher cryptic database names or rely on colleagues for institutional knowledge. I synthesized 50+ legacy attributes down to the essentials: name, definition, description, ownership, creation and edit history, and related content.</p>
+  <p>The business glossary connects business terminology to the technical metadata in dataset columns. By surfacing business context upfront, data scientists no longer need to decipher cryptic database names or rely on colleagues for institutional knowledge.</p>
 
-  <div class="case-placeholder-img">Image — Business Glossary term detail page</div>
+  <img src="../../assets/images/wdp-catalog-1.png" alt="Business Glossary catalog view" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:32px;">
+
+  <img src="../../assets/images/wdp-bg-relatedcontent-2.gif" alt="Business Glossary related content" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
 
   <h3>Governance dashboard</h3>
 
-  <p>The dashboard gives Chief Data Officers a single view of governance program health — policy enforcement rates, violations, most-used business terms, heavily-accessed data assets, and overall coverage. The key design question was: what does a CDO need to see to feel confident that their catalog is compliant?</p>
+  <p>The dashboard gives Chief Data Officers a single view of governance program health — policy enforcement rates, violations, most-used business terms, and overall coverage. The key design question: what does a CDO need to see to feel confident their catalog is compliant?</p>
 
   <blockquote>
     <p>"The more I work with data and metadata, the more I see the whole world as a graph. I want a single pane of glass."</p>
   </blockquote>
 
-  <div class="case-placeholder-img">Image — Governance Dashboard</div>
+  <img src="../../assets/images/wdp-governance-dashboard.gif" alt="Governance Dashboard" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
 
   <hr class="case-divider">
 

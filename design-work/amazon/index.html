@@ -42,9 +42,9 @@
 
 <div class="case-body">
 
-  <p>Amazon Prime offered a growing suite of digital benefits — Prime Music, Kindle Lending Library, Amazon Instant Video — but many subscribers didn't know what they had access to, let alone how to use it. The existing 1Button browser extension handled price comparisons for physical goods, but left the entire media side of Prime untouched. My internship project explored how to change that.</p>
+  <img src="../../assets/images/amazon-media.png" alt="Amazon Prime media services overview" loading="eager" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
 
-  <div class="case-placeholder-img">Image — Extension concept overview</div>
+  <p>Amazon Prime offered a growing suite of digital benefits — Prime Music, Kindle Lending Library, Amazon Instant Video — but many subscribers didn't know what they had access to, let alone how to use it. The existing 1Button browser extension handled price comparisons for physical goods, but left the entire media side of Prime untouched. My internship project explored how to change that.</p>
 
   <h2>The problem</h2>
 
@@ -58,23 +58,29 @@
 
   <h3>Mapping the use cases</h3>
 
-  <p>I started by mapping user scenarios across the three primary content types — books, video, and music — and across different web contexts where searches happen: general web searches, entertainment news articles, review sites, and retailer pages. Each context warranted different extension behavior and different content prioritization.</p>
+  <p>I started by mapping user scenarios across the three primary content types — books, video, and music — and across different web contexts where searches happen. Each context warranted different extension behavior and content prioritization. The extension also needed to handle account state: a member who already owns a title sees something different than one who hasn't purchased it.</p>
 
-  <p>A critical complexity was account state. The extension needed to respond differently based on Prime membership status, purchase history, and content availability. A member who already owns a title should see something different than one who hasn't. I defined conditional logic for the major account states before moving into flows and wireframes.</p>
+  <img src="../../assets/images/amazon-primemusic-userflow.png" alt="Prime Music user flow" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
 
-  <div class="case-placeholder-img">Image — User scenario mapping</div>
+  <h3>Wireframes</h3>
 
-  <h3>Flows &amp; wireframes</h3>
+  <p>With use cases defined, I worked through wireframes covering the range of trigger contexts and content types. The design challenge was keeping the extension lightweight and non-intrusive — helpful when relevant, invisible when not.</p>
 
-  <p>With use cases defined, I worked through user flows covering the range of trigger contexts and content types, then translated these into wireframes. The design challenge was keeping the extension lightweight and non-intrusive — helpful when relevant, invisible when not. I applied Amazon's established visual design language to bring the wireframes to a prototype-ready state.</p>
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/amazon-instantvideo-wireframe.png" alt="Amazon Instant Video wireframes" loading="lazy" decoding="async">
+    <img src="../../assets/images/amazon-original-design.jpg" alt="Original design exploration" loading="lazy" decoding="async">
+  </div>
 
-  <div class="case-placeholder-img">Image — Wireframes and user flows</div>
+  <h3>Prototype</h3>
 
-  <h2>Solution</h2>
+  <p>I applied Amazon's established visual design language to bring the wireframes to a prototype-ready state, testing across the primary content type scenarios.</p>
 
-  <p>The result was a contextual browser extension that detects when a Prime member is viewing or searching for media content, then surfaces relevant suggestions from their subscription. Responses are tailored to individual membership status and content eligibility — a member without Prime sees a conversion prompt, while an active subscriber sees what they can access right now.</p>
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/amazon-primemusic-prototype-1.png" alt="Prime Music extension prototype" loading="lazy" decoding="async">
+    <img src="../../assets/images/amazon-primemusic-prototype-2.png" alt="Prime Music extension prototype variant" loading="lazy" decoding="async">
+  </div>
 
-  <div class="case-placeholder-img">Image — Final prototype</div>
+  <img src="../../assets/images/amazon-instantvideo-prototype.jpg" alt="Amazon Instant Video prototype" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
 
   <hr class="case-divider">
 
