@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBM Watson Data Platform — McKenzie Carlile</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">McKenzie Carlile</a>
+  <ul class="nav-links">
+    <li><a href="/field-reports/">Field reports</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="case-hero">
+  <div class="case-hero-inner">
+    <a href="/" class="case-back">← Work</a>
+    <div class="case-hero-label">Product Design</div>
+    <h1>IBM Watson Data Platform</h1>
+    <p class="case-hero-sub">Designing governance tools that help enterprise teams understand, trust, and protect the data powering their AI and analytics models.</p>
+    <div class="case-meta">
+      <div class="case-meta-item">
+        <span class="case-meta-label">Role</span>
+        <span class="case-meta-value">UX Designer, Governance Squad</span>
+      </div>
+      <div class="case-meta-item">
+        <span class="case-meta-label">Timeline</span>
+        <span class="case-meta-value">Early 2017 – Dec 2017</span>
+      </div>
+      <div class="case-meta-item">
+        <span class="case-meta-label">Team</span>
+        <span class="case-meta-value">60 designers, researchers &amp; engineers</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="case-body">
+
+  <p>Watson Data Platform is IBM's cloud-native environment for industrial-scale data science — a unified product combining metadata cataloging, collaborative projects, data refinery, pipeline development, notebook-based analysis, and machine learning model training. I joined the governance squad in early 2017, focused on the tools that help enterprise teams manage the quality, compliance, and trustworthiness of their data assets.</p>
+
+  <div class="case-placeholder-img">Image — Watson Data Platform overview</div>
+
+  <h2>The problem</h2>
+
+  <p>Data science models are only as good as the data they consume. Poor quality data, incomplete metadata, and compliance gaps create real risk — in regulated industries, the consequences can be severe. Our squad asked: <em>How might we build governance tools that enable teams to understand, trust, and protect the data their analytic assets ingest?</em></p>
+
+  <p>Through research at IBM's Chief Data Officer Summit and interviews with customers and internal teams, we identified four compounding pain points.</p>
+
+  <div class="case-pain-grid">
+    <div class="case-pain-item">
+      <h4>Data discovery</h4>
+      <p>Data consumers spend disproportionate time searching for data rather than analyzing it. Assets scattered across company warehouses make finding relevant data — and understanding ownership and access requirements — slow and opaque.</p>
+    </div>
+    <div class="case-pain-item">
+      <h4>Data understanding</h4>
+      <p>Understanding dataset context requires "tribal knowledge." Technical metadata lacks business clarity, forcing data stewards to manually profile data column-by-column to bridge the gap between technical systems and business meaning.</p>
+    </div>
+    <div class="case-pain-item">
+      <h4>Policy enforcement</h4>
+      <p>Governance teams can document policies but struggle to enforce them. Most rely on expensive manual auditing. Real-time compliance monitoring simply doesn't exist in accessible form. The gap between documentation and enforcement is wide.</p>
+    </div>
+    <div class="case-pain-item">
+      <h4>Accessibility</h4>
+      <p>Legacy governance tools were built for governance teams, not data scientists. The interfaces are IT-focused and overwhelming — showing so much information that they become unhelpful to the people who need them most.</p>
+    </div>
+  </div>
+
+  <h2>Process</h2>
+
+  <h3>Research &amp; synthesis</h3>
+
+  <p>Our research spanned generative interviews, observations at IBM's Chief Data Officer Summit, Forrester and Gartner analyst reports, and competitive documentation review. A key finding was the emergence of the Chief Data Officer as a critical persona — an executive bridging data infrastructure and business units, managing compliance while unlocking data's value. We mapped the full CDO org structure to understand the spectrum of roles from highly technical to purely business-focused.</p>
+
+  <p>Cross-squad, six design researchers participated in a week-long synthesis workshop to cluster and organize data points across the platform's six capability areas. This gave us a shared model of the problem space before any design work began.</p>
+
+  <div class="case-placeholder-img">Image — Research synthesis workshop</div>
+
+  <h3>Information architecture</h3>
+
+  <p>I created user flow diagrams mapping navigation across three core governance tools, developed sitemaps showing hierarchy and platform connections, and ran remote card-sorting activities with sponsor users to prioritize which business term attributes mattered most. This reduced 50+ legacy attributes to a manageable essential set.</p>
+
+  <h2>Three governance tools</h2>
+
+  <h3>Policy manager</h3>
+
+  <p>The policy manager lets CDO office staff build complex governance rules without writing code, powered by IBM's policy enforcement engine. I designed around the full lifecycle of a policy — draft, active, archive — and explored how rules nest within policies and categories, giving governance teams a path from static documentation to active enforcement.</p>
+
+  <div class="case-placeholder-img">Image — Policy Manager interface</div>
+
+  <h3>Business glossary</h3>
+
+  <p>The business glossary connects business terminology to the technical metadata in dataset columns. By surfacing business context upfront, data scientists no longer need to decipher cryptic database names or rely on colleagues for institutional knowledge. I synthesized 50+ legacy attributes down to the essentials: name, definition, description, ownership, creation and edit history, and related content.</p>
+
+  <div class="case-placeholder-img">Image — Business Glossary term detail page</div>
+
+  <h3>Governance dashboard</h3>
+
+  <p>The dashboard gives Chief Data Officers a single view of governance program health — policy enforcement rates, violations, most-used business terms, heavily-accessed data assets, and overall coverage. The key design question was: what does a CDO need to see to feel confident that their catalog is compliant?</p>
+
+  <blockquote>
+    <p>"The more I work with data and metadata, the more I see the whole world as a graph. I want a single pane of glass."</p>
+  </blockquote>
+
+  <div class="case-placeholder-img">Image — Governance Dashboard</div>
+
+  <hr class="case-divider">
+
+  <h2>Outcome</h2>
+
+  <p>The public open beta launched in December 2017, delivering all three governance experiences. Post-launch research surfaced several clear next steps: users consistently requested approval and review workflows, organizations needed graceful paths to migrate from legacy on-premises governance systems, and testing confirmed that the information-dense tabular interface served governance teams well but alienated data consumers — pointing toward role-differentiated experiences in the next design cycle.</p>
+
+</div>
+
+<footer>
+  <span>© 2025 McKenzie Carlile</span>
+  <span>Lake Tahoe, California</span>
+</footer>
+
+</body>
+</html>
