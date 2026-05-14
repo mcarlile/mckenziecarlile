@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Admin — McKenzie Carlile</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-sans: 'Geist', system-ui, sans-serif;
+      --font-serif: 'EB Garamond', Georgia, serif;
+      --ink: #1a1a1a;
+      --ink-mid: #666;
+      --off: #f5f4f1;
+      --border: #e8e6e2;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: #fff;
+      padding: 16px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.8; }
+    .btn-primary { background: var(--ink); color: #fff; }
+    .btn-secondary { background: var(--off); color: var(--ink); }
+    .btn-danger { background: #c0392b; color: #fff; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .token-groups { display: flex; flex-direction: column; gap: 48px; }
+
+    .token-group h2 {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .token-rows { display: flex; flex-direction: column; gap: 1px; }
+
+    .token-row {
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--off);
+    }
+
+    .token-name {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--ink-mid);
+    }
+
+    .token-value-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .token-input {
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      padding: 4px 6px;
+      width: 100%;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .token-input:focus {
+      outline: none;
+      border-color: var(--ink);
+      background: var(--off);
+    }
+    .token-input.modified { border-color: #c09a5a; background: #fdf8f0; }
+
+    .color-swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .color-swatch input[type="color"] {
+      position: absolute;
+      inset: -4px;
+      width: calc(100% + 8px);
+      height: calc(100% + 8px);
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    .token-type-badge {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .badge-ref { background: #e8f0fe; color: #1a56db; }
+    .badge-sys { background: #def7ec; color: #057a55; }
+
+    /* Preview panel */
+    .preview-panel {
+      position: sticky;
+      top: 24px;
+      background: var(--off);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .preview-panel h3 {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      margin-bottom: 20px;
+    }
+
+    .preview-site {
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+    }
+
+    .preview-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--preview-border, #e8e6e2);
+    }
+
+    .preview-logo {
+      font-family: var(--preview-serif, var(--font-serif));
+      font-size: 12px;
+      color: var(--preview-ink, #1a1a1a);
+    }
+
+    .preview-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .preview-link {
+      font-size: 10px;
+      color: var(--preview-ink-mid, #666);
+    }
+
+    .preview-hero {
+      height: 120px;
+      background: var(--preview-thumb-1, #b8c4b0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--preview-serif, var(--font-serif));
+      font-style: italic;
+      font-size: 16px;
+      color: white;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+    }
+
+    .preview-body { padding: 14px; }
+
+    .preview-body-text {
+      font-size: 9px;
+      color: var(--preview-ink-mid, #666);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .preview-divider {
+      height: 1px;
+      background: var(--preview-border, #e8e6e2);
+      margin: 8px 0;
+    }
+
+    .preview-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+    }
+
+    .preview-row-title {
+      font-family: var(--preview-serif, var(--font-serif));
+      font-size: 11px;
+      color: var(--preview-ink, #1a1a1a);
+    }
+
+    .preview-row-sub {
+      font-size: 8px;
+      color: var(--preview-ink-mid, #666);
+    }
+
+    /* Export panel */
+    .export-section {
+      margin-top: 20px;
+    }
+
+    .export-section h3 {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      margin-bottom: 10px;
+    }
+
+    .export-area {
+      font-family: monospace;
+      font-size: 11px;
+      line-height: 1.7;
+      background: var(--ink);
+      color: #e8e6e2;
+      border-radius: 4px;
+      padding: 14px;
+      width: 100%;
+      resize: none;
+      border: none;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .copy-confirm {
+      font-size: 11px;
+      color: #057a55;
+      margin-top: 6px;
+      height: 16px;
+      transition: opacity 0.3s;
+    }
+
+    .notice {
+      background: #fef9ec;
+      border: 1px solid #f5e07a;
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #7a6200;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Token Admin</h1>
+  <div class="header-actions">
+    <a href="/" style="font-size:12px;color:#666;text-decoration:none;">← Back to site</a>
+    <button class="btn btn-secondary" onclick="resetAll()">Reset all</button>
+    <button class="btn btn-primary" onclick="copyCSS()">Copy CSS</button>
+  </div>
+</header>
+
+<div class="notice">
+  Changes here update the live preview on the right. When you're happy, click <strong>Copy CSS</strong> and paste the output into <code>assets/style.css</code> to apply it to the real site.
+</div>
+
+<div class="layout">
+  <div class="token-groups" id="tokenGroups"></div>
+
+  <div>
+    <div class="preview-panel">
+      <h3>Live Preview</h3>
+      <div class="preview-site" id="previewSite">
+        <div class="preview-nav">
+          <div class="preview-logo">McKenzie Carlile</div>
+          <div class="preview-links">
+            <span class="preview-link">Field reports</span>
+            <span class="preview-link">Contact</span>
+          </div>
+        </div>
+        <div class="preview-hero" id="previewHero">Designer, explorer.</div>
+        <div class="preview-body">
+          <div class="preview-body-text">Product designer at the intersection of AI, human-centered design, and cloud computing.</div>
+          <div id="previewDivider" class="preview-divider"></div>
+          <div class="preview-row">
+            <div>
+              <div class="preview-row-title">Waymo</div>
+              <div class="preview-row-sub">Autonomous vehicle experience</div>
+            </div>
+            <span style="font-size:11px;color:#ccc;">↗</span>
+          </div>
+          <div class="preview-divider" id="previewDivider2"></div>
+          <div class="preview-row">
+            <div>
+              <div class="preview-row-title">Google</div>
+              <div class="preview-row-sub">Developer tools platform</div>
+            </div>
+            <span style="font-size:11px;color:#ccc;">↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="export-section">
+        <h3>Generated CSS</h3>
+        <textarea class="export-area" id="exportArea" rows="14" readonly></textarea>
+        <div class="copy-confirm" id="copyConfirm"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const TOKENS = {
+    "Reference — Colors": {
+      type: "ref",
+      tokens: {
+        "--ref-white":     { value: "#ffffff", isColor: true },
+        "--ref-off-white": { value: "#f5f4f1", isColor: true },
+        "--ref-gray-100":  { value: "#e8e6e2", isColor: true },
+        "--ref-gray-300":  { value: "#cccccc", isColor: true },
+        "--ref-gray-500":  { value: "#aaaaaa", isColor: true },
+        "--ref-gray-600":  { value: "#999999", isColor: true },
+        "--ref-gray-700":  { value: "#666666", isColor: true },
+        "--ref-gray-800":  { value: "#555555", isColor: true },
+        "--ref-gray-900":  { value: "#444444", isColor: true },
+        "--ref-black":     { value: "#1a1a1a", isColor: true },
+        "--ref-green-100": { value: "#b8c4b0", isColor: true },
+        "--ref-green-200": { value: "#a0b4a8", isColor: true },
+        "--ref-teal-200":  { value: "#8ea89e", isColor: true },
+      }
+    },
+    "Reference — Spacing": {
+      type: "ref",
+      tokens: {
+        "--ref-size-4":  { value: "4px" },
+        "--ref-size-8":  { value: "8px" },
+        "--ref-size-12": { value: "12px" },
+        "--ref-size-16": { value: "16px" },
+        "--ref-size-20": { value: "20px" },
+        "--ref-size-24": { value: "24px" },
+        "--ref-size-32": { value: "32px" },
+        "--ref-size-48": { value: "48px" },
+        "--ref-size-64": { value: "64px" },
+        "--ref-size-80": { value: "80px" },
+        "--ref-size-88": { value: "88px" },
+      }
+    },
+    "Reference — Radii & Typography": {
+      type: "ref",
+      tokens: {
+        "--ref-radius-sm":  { value: "3px" },
+        "--ref-radius-md":  { value: "4px" },
+        "--ref-font-serif": { value: "'EB Garamond', Georgia, serif" },
+        "--ref-font-sans":  { value: "'Geist', system-ui, sans-serif" },
+      }
+    },
+    "System — Colors": {
+      type: "sys",
+      tokens: {
+        "--color-bg":             { value: "var(--ref-white)", isColor: false },
+        "--color-surface":        { value: "var(--ref-off-white)" },
+        "--color-border":         { value: "var(--ref-gray-100)" },
+        "--color-text-primary":   { value: "var(--ref-black)" },
+        "--color-text-secondary": { value: "var(--ref-gray-700)" },
+        "--color-text-tertiary":  { value: "var(--ref-gray-500)" },
+        "--color-text-muted":     { value: "var(--ref-gray-600)" },
+        "--color-thumb-1":        { value: "var(--ref-green-100)" },
+        "--color-thumb-2":        { value: "var(--ref-teal-200)" },
+        "--color-thumb-3":        { value: "var(--ref-green-200)" },
+      }
+    },
+    "System — Layout": {
+      type: "sys",
+      tokens: {
+        "--font-serif":   { value: "var(--ref-font-serif)" },
+        "--font-sans":    { value: "var(--ref-font-sans)" },
+        "--space-page":   { value: "var(--ref-size-16)" },
+        "--space-section":{ value: "var(--ref-size-80)" },
+        "--space-gap":    { value: "var(--ref-size-8)" },
+        "--radius-card":  { value: "var(--ref-radius-md)" },
+        "--radius-thumb": { value: "var(--ref-radius-sm)" },
+      }
+    }
+  };
+
+  const state = {};
+
+  function init() {
+    Object.entries(TOKENS).forEach(([groupName, group]) => {
+      Object.entries(group.tokens).forEach(([name, def]) => {
+        state[name] = def.value;
+      });
+    });
+    renderGroups();
+    updateExport();
+    updatePreview();
+  }
+
+  function renderGroups() {
+    const container = document.getElementById("tokenGroups");
+    container.innerHTML = "";
+
+    Object.entries(TOKENS).forEach(([groupName, group]) => {
+      const section = document.createElement("div");
+      section.className = "token-group";
+
+      const h2 = document.createElement("h2");
+      h2.textContent = groupName;
+      section.appendChild(h2);
+
+      const rows = document.createElement("div");
+      rows.className = "token-rows";
+
+      Object.entries(group.tokens).forEach(([name, def]) => {
+        const row = document.createElement("div");
+        row.className = "token-row";
+
+        const nameEl = document.createElement("div");
+        nameEl.className = "token-name";
+        nameEl.textContent = name;
+
+        const valueWrap = document.createElement("div");
+        valueWrap.className = "token-value-wrap";
+
+        if (def.isColor) {
+          const swatch = document.createElement("div");
+          swatch.className = "color-swatch";
+          swatch.style.background = def.value;
+
+          const picker = document.createElement("input");
+          picker.type = "color";
+          picker.value = def.value;
+          picker.addEventListener("input", e => {
+            const val = e.target.value;
+            state[name] = val;
+            swatch.style.background = val;
+            input.value = val;
+            input.classList.add("modified");
+            updateExport();
+            updatePreview();
+          });
+          swatch.appendChild(picker);
+          valueWrap.appendChild(swatch);
+        }
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "token-input";
+        input.value = def.value;
+        input.dataset.name = name;
+
+        if (state[name] !== def.value) {
+          input.classList.add("modified");
+          input.value = state[name];
+        }
+
+        input.addEventListener("input", e => {
+          const val = e.target.value;
+          state[name] = val;
+          e.target.classList.toggle("modified", val !== def.value);
+          if (def.isColor) {
+            const swatch = e.target.previousElementSibling;
+            if (swatch) swatch.style.background = val;
+          }
+          updateExport();
+          updatePreview();
+        });
+
+        valueWrap.appendChild(input);
+
+        const badge = document.createElement("span");
+        badge.className = "token-type-badge " + (group.type === "ref" ? "badge-ref" : "badge-sys");
+        badge.textContent = group.type;
+
+        row.appendChild(nameEl);
+        row.appendChild(valueWrap);
+        row.appendChild(badge);
+        rows.appendChild(row);
+      });
+
+      section.appendChild(rows);
+      container.appendChild(section);
+    });
+  }
+
+  function updatePreview() {
+    const get = name => state[name] || "";
+
+    const resolveColor = val => {
+      const match = val.match(/var\((--[\w-]+)\)/);
+      if (match) return state[match[1]] || val;
+      return val;
+    };
+
+    const hero = document.getElementById("previewHero");
+    hero.style.background = resolveColor(get("--color-thumb-1"));
+
+    const site = document.getElementById("previewSite");
+    site.style.background = resolveColor(get("--color-bg"));
+
+    document.querySelectorAll(".preview-row-title").forEach(el => {
+      el.style.fontFamily = get("--ref-font-serif") || "'EB Garamond', serif";
+      el.style.color = resolveColor(get("--color-text-primary"));
+    });
+
+    document.querySelectorAll(".preview-row-sub, .preview-body-text, .preview-link").forEach(el => {
+      el.style.color = resolveColor(get("--color-text-secondary"));
+    });
+
+    document.querySelectorAll(".preview-divider").forEach(el => {
+      el.style.background = resolveColor(get("--color-border"));
+    });
+
+    document.querySelector(".preview-logo").style.fontFamily =
+      get("--ref-font-serif") || "'EB Garamond', serif";
+    document.querySelector(".preview-logo").style.color = resolveColor(get("--color-text-primary"));
+    document.querySelector(".preview-nav").style.borderBottomColor = resolveColor(get("--color-border"));
+  }
+
+  function updateExport() {
+    const lines = [":root {"];
+
+    const refTokens = [];
+    const sysTokens = [];
+
+    Object.entries(TOKENS).forEach(([groupName, group]) => {
+      const isRef = group.type === "ref";
+      const sectionLines = [`  /* ${groupName} */`];
+      Object.keys(group.tokens).forEach(name => {
+        sectionLines.push(`  ${name}: ${state[name]};`);
+      });
+      sectionLines.push("");
+      if (isRef) refTokens.push(...sectionLines);
+      else sysTokens.push(...sectionLines);
+    });
+
+    lines.push("  /* ── REFERENCE TOKENS ── */", ...refTokens);
+    lines.push("  /* ── SYSTEM TOKENS ── */", ...sysTokens);
+    lines.push("}");
+
+    document.getElementById("exportArea").value = lines.join("\n");
+  }
+
+  function copyCSS() {
+    const text = document.getElementById("exportArea").value;
+    navigator.clipboard.writeText(text).then(() => {
+      const el = document.getElementById("copyConfirm");
+      el.textContent = "Copied to clipboard.";
+      setTimeout(() => { el.textContent = ""; }, 2500);
+    });
+  }
+
+  function resetAll() {
+    if (!confirm("Reset all tokens to their default values?")) return;
+    Object.entries(TOKENS).forEach(([, group]) => {
+      Object.entries(group.tokens).forEach(([name, def]) => {
+        state[name] = def.value;
+      });
+    });
+    renderGroups();
+    updateExport();
+    updatePreview();
+  }
+
+  init();
+</script>
+</body>
+</html>
