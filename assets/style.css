@@ -710,4 +710,49 @@ footer span {
   .nav-links {
     gap: 20px;
   }
+
+  .case-pain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-meta {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .hero {
+    height: calc(100svh - 72px);
+  }
+
+  .about {
+    padding: 0 4px;
+    margin-top: 56px;
+  }
+
+  .report-hero-meta {
+    padding: 24px 20px;
+  }
+
+  .case-hero {
+    padding: 40px 0 36px;
+  }
+
+  .case-hero-inner,
+  .case-body {
+    padding: 0 4px;
+  }
+
+  .case-body h2 {
+    margin-top: 40px;
+  }
+
+  .case-back {
+    margin-bottom: 32px;
+  }
 }
