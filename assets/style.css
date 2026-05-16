@@ -211,6 +211,50 @@ footer span {
   margin-bottom: 18px;
 }
 
+/* ── CAREER TIMELINE ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 24px;
+  padding: 20px 4px;
+  border-top: 1px solid var(--color-border);
+  align-items: baseline;
+}
+
+.timeline-item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.timeline-period {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.timeline-role {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.timeline-company {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
 /* ── WORK LIST ── */
 .section {
   padding: 0 0 var(--space-section);
@@ -709,5 +753,55 @@ footer span {
 
   .nav-links {
     gap: 20px;
+  }
+
+  .case-pain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-meta {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .hero {
+    height: calc(100svh - 72px);
+  }
+
+  .about {
+    padding: 0 4px;
+    margin-top: 56px;
+  }
+
+  .report-hero-meta {
+    padding: 24px 20px;
+  }
+
+  .case-hero {
+    padding: 40px 0 36px;
+  }
+
+  .case-hero-inner,
+  .case-body {
+    padding: 0 4px;
+  }
+
+  .case-body h2 {
+    margin-top: 40px;
+  }
+
+  .case-back {
+    margin-bottom: 32px;
   }
 }
