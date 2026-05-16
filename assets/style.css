@@ -763,11 +763,6 @@ footer span {
     flex-wrap: wrap;
     gap: 24px;
   }
-
-  .timeline-item {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
 }
 
 @media (max-width: 480px) {
