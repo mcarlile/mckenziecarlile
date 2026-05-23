@@ -3,620 +3,761 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Token Admin — McKenzie Carlile</title>
+  <title>Design System — McKenzie Carlile</title>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Geograph';
+      src: local('Geograph-Light'), url('../assets/fonts/test-geograph-light.woff2') format('woff2');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Geograph';
+      src: local('Geograph-Regular'), local('Geograph'), url('../assets/fonts/test-geograph-regular.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Geograph';
+      src: local('Geograph-Medium'), url('../assets/fonts/test-geograph-medium.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --font-sans: 'Geist', system-ui, sans-serif;
-      --font-serif: 'EB Garamond', Georgia, serif;
+      --sans: 'Geograph', 'Geist', system-ui, sans-serif;
+      --serif: 'EB Garamond', Georgia, serif;
       --ink: #1a1a1a;
       --ink-mid: #666;
+      --ink-light: #aaa;
       --off: #f5f4f1;
       --border: #e8e6e2;
+      --blue: #1a56db;
+      --blue-bg: #e8f0fe;
+      --green: #057a55;
+      --green-bg: #def7ec;
+      --amber: #7a6200;
+      --amber-bg: #fef9ec;
     }
 
-    body {
-      font-family: var(--font-sans);
-      color: var(--ink);
-      background: #fff;
-      padding: 16px;
-    }
+    body { font-family: var(--sans); color: var(--ink); background: #fff; padding: 16px; }
 
+    /* ── HEADER ── */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0 32px;
+      padding: 20px 0 24px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 40px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
-
-    header h1 {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 400;
-      font-style: italic;
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
+    header h1 { font-family: var(--serif); font-size: 22px; font-weight: 400; font-style: italic; }
+    .header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
     .btn {
-      font-family: var(--font-sans);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 8px 16px;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-      transition: opacity 0.15s;
+      font-family: var(--sans); font-size: 12px; font-weight: 500;
+      letter-spacing: 0.04em; padding: 7px 14px; border-radius: 4px;
+      border: none; cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
     }
-    .btn:hover { opacity: 0.8; }
+    .btn:hover { opacity: 0.75; }
     .btn-primary { background: var(--ink); color: #fff; }
     .btn-secondary { background: var(--off); color: var(--ink); }
-    .btn-danger { background: #c0392b; color: #fff; }
+    .back-link { font-size: 12px; color: var(--ink-mid); text-decoration: none; }
+    .back-link:hover { color: var(--ink); }
 
-    .layout {
+    /* ── TABS ── */
+    .tab-bar {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+    .tab-btn {
+      font-family: var(--sans); font-size: 13px; font-weight: 400;
+      color: var(--ink-mid); background: none; border: none;
+      border-bottom: 2px solid transparent; padding: 14px 20px 12px;
+      cursor: pointer; transition: color 0.15s; margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── NOTICE ── */
+    .notice {
+      background: var(--amber-bg); border: 1px solid #f0d060; border-radius: 4px;
+      padding: 10px 14px; font-size: 12px; color: var(--amber);
+      margin-bottom: 28px; line-height: 1.5;
+    }
+
+    /* ── TOKENS TAB ── */
+    .tokens-layout {
       display: grid;
-      grid-template-columns: 1fr 380px;
+      grid-template-columns: 1fr 360px;
       gap: 40px;
       align-items: start;
     }
-
-    .token-groups { display: flex; flex-direction: column; gap: 48px; }
-
-    .token-group h2 {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-      margin-bottom: 16px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
+    .token-groups { display: flex; flex-direction: column; gap: 40px; }
+    .token-group-title {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-mid);
+      margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
     }
-
-    .token-rows { display: flex; flex-direction: column; gap: 1px; }
-
+    .token-rows { display: flex; flex-direction: column; }
     .token-row {
       display: grid;
-      grid-template-columns: 220px 1fr auto;
+      grid-template-columns: 210px 1fr auto;
       align-items: center;
-      gap: 16px;
-      padding: 10px 0;
+      gap: 12px;
+      padding: 9px 0;
       border-bottom: 1px solid var(--off);
     }
-
-    .token-name {
-      font-family: monospace;
-      font-size: 12px;
-      color: var(--ink-mid);
-    }
-
-    .token-value-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .token-name { font-family: monospace; font-size: 11.5px; color: var(--ink-mid); }
+    .token-value-wrap { display: flex; align-items: center; gap: 8px; }
     .token-input {
-      font-family: monospace;
-      font-size: 13px;
-      color: var(--ink);
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      padding: 4px 6px;
-      width: 100%;
-      transition: border-color 0.15s, background 0.15s;
+      font-family: monospace; font-size: 12px; color: var(--ink);
+      background: transparent; border: 1px solid transparent; border-radius: 3px;
+      padding: 4px 6px; width: 100%; transition: border-color 0.15s, background 0.15s;
     }
-    .token-input:focus {
-      outline: none;
-      border-color: var(--ink);
-      background: var(--off);
-    }
+    .token-input:focus { outline: none; border-color: var(--ink); background: var(--off); }
     .token-input.modified { border-color: #c09a5a; background: #fdf8f0; }
-
     .color-swatch {
-      width: 20px;
-      height: 20px;
-      border-radius: 3px;
-      border: 1px solid var(--border);
-      flex-shrink: 0;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
+      width: 20px; height: 20px; border-radius: 3px; border: 1px solid var(--border);
+      flex-shrink: 0; cursor: pointer; position: relative; overflow: hidden;
     }
     .color-swatch input[type="color"] {
-      position: absolute;
-      inset: -4px;
-      width: calc(100% + 8px);
-      height: calc(100% + 8px);
-      border: none;
-      cursor: pointer;
-      opacity: 0;
+      position: absolute; inset: -4px; width: calc(100% + 8px);
+      height: calc(100% + 8px); border: none; cursor: pointer; opacity: 0;
     }
-
-    .token-type-badge {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      border-radius: 2px;
-      white-space: nowrap;
+    .badge {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap;
     }
-    .badge-ref { background: #e8f0fe; color: #1a56db; }
-    .badge-sys { background: #def7ec; color: #057a55; }
+    .badge-ref { background: var(--blue-bg); color: var(--blue); }
+    .badge-sys { background: var(--green-bg); color: var(--green); }
 
     /* Preview panel */
-    .preview-panel {
-      position: sticky;
-      top: 24px;
-      background: var(--off);
-      border-radius: 8px;
-      padding: 24px;
+    .preview-panel { position: sticky; top: 24px; }
+    .panel-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-mid); margin-bottom: 12px;
     }
-
-    .preview-panel h3 {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-      margin-bottom: 20px;
-    }
-
     .preview-site {
-      background: white;
-      border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+      border-radius: 6px; overflow: hidden;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.08), 0 0 0 1px var(--border);
     }
-
     .preview-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--preview-border, #e8e6e2);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; border-bottom: 1px solid #e8e6e2;
     }
-
-    .preview-logo {
-      font-family: var(--preview-serif, var(--font-serif));
-      font-size: 12px;
-      color: var(--preview-ink, #1a1a1a);
+    .preview-logo { font-family: var(--serif); font-size: 12px; color: #1a1a1a; }
+    .preview-links { display: flex; gap: 12px; }
+    .preview-link { font-size: 10px; color: #666; }
+    .preview-hero {
+      height: 110px; background: #b8c4b0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-style: italic; font-size: 15px;
+      color: white; text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+      padding: 16px; text-align: center; line-height: 1.3;
     }
+    .preview-body { padding: 12px 14px; background: white; }
+    .preview-body-text { font-size: 9px; color: #666; line-height: 1.7; margin-bottom: 10px; }
+    .preview-divider { height: 1px; background: #e8e6e2; margin: 6px 0; }
+    .preview-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; }
+    .preview-row-title { font-family: var(--serif); font-size: 11px; color: #1a1a1a; }
+    .preview-row-sub { font-size: 8px; color: #666; }
+    .export-section { margin-top: 20px; }
+    .export-area {
+      font-family: monospace; font-size: 11px; line-height: 1.7;
+      background: var(--ink); color: #e8e6e2; border-radius: 4px;
+      padding: 14px; width: 100%; resize: vertical; border: none;
+      white-space: pre; overflow-x: auto;
+    }
+    .copy-confirm { font-size: 11px; color: var(--green); margin-top: 6px; height: 16px; }
 
-    .preview-links {
-      display: flex;
+    /* ── TYPOGRAPHY TAB ── */
+    .type-section-header {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-mid);
+      margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .type-section-header:first-child { margin-top: 0; }
+    .type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 12px;
     }
-
-    .preview-link {
-      font-size: 10px;
-      color: var(--preview-ink-mid, #666);
+    .specimen-card { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .specimen-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 9px 14px 8px; background: var(--off);
     }
-
-    .preview-hero {
-      height: 120px;
-      background: var(--preview-thumb-1, #b8c4b0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--preview-serif, var(--font-serif));
-      font-style: italic;
-      font-size: 16px;
-      color: white;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+    .specimen-name {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-mid);
     }
-
-    .preview-body { padding: 14px; }
-
-    .preview-body-text {
-      font-size: 9px;
-      color: var(--preview-ink-mid, #666);
-      line-height: 1.6;
-      margin-bottom: 12px;
+    .specimen-tag { font-size: 10px; color: var(--ink-light); }
+    .specimen-render {
+      padding: 24px 18px; background: #fff; min-height: 80px;
+      display: flex; align-items: center;
     }
-
-    .preview-divider {
-      height: 1px;
-      background: var(--preview-border, #e8e6e2);
-      margin: 8px 0;
+    .specimen-render.dark { background: #252525; }
+    .specimen-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
     }
-
-    .preview-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 0;
+    .control-cell { background: #fff; padding: 8px 10px; }
+    .control-label {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-light); margin-bottom: 4px;
     }
-
-    .preview-row-title {
-      font-family: var(--preview-serif, var(--font-serif));
-      font-size: 11px;
-      color: var(--preview-ink, #1a1a1a);
+    .control-input {
+      font-family: monospace; font-size: 12px; color: var(--ink);
+      background: transparent; border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 2px 0; width: 100%; transition: border-color 0.15s;
     }
-
-    .preview-row-sub {
-      font-size: 8px;
-      color: var(--preview-ink-mid, #666);
+    .control-input:focus { outline: none; border-bottom-color: var(--ink); }
+    .control-input.modified { border-bottom-color: #c09a5a; color: #7a5200; }
+    .type-export-area {
+      font-family: monospace; font-size: 11px; line-height: 1.7;
+      background: var(--ink); color: #e8e6e2; border-radius: 4px;
+      padding: 16px; width: 100%; resize: vertical; border: none;
+      white-space: pre; overflow-x: auto; margin-top: 12px;
     }
+    .type-actions { display: flex; gap: 10px; align-items: center; margin-top: 12px; }
 
-    /* Export panel */
-    .export-section {
-      margin-top: 20px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .tokens-layout { grid-template-columns: 1fr; }
+      .preview-panel { position: static; }
     }
-
-    .export-section h3 {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-      margin-bottom: 10px;
-    }
-
-    .export-area {
-      font-family: monospace;
-      font-size: 11px;
-      line-height: 1.7;
-      background: var(--ink);
-      color: #e8e6e2;
-      border-radius: 4px;
-      padding: 14px;
-      width: 100%;
-      resize: none;
-      border: none;
-      white-space: pre;
-      overflow-x: auto;
-    }
-
-    .copy-confirm {
-      font-size: 11px;
-      color: #057a55;
-      margin-top: 6px;
-      height: 16px;
-      transition: opacity 0.3s;
-    }
-
-    .notice {
-      background: #fef9ec;
-      border: 1px solid #f5e07a;
-      border-radius: 4px;
-      padding: 10px 14px;
-      font-size: 12px;
-      color: #7a6200;
-      margin-bottom: 32px;
-      line-height: 1.5;
+    @media (max-width: 600px) {
+      .token-row { grid-template-columns: 1fr auto; }
+      .token-name { grid-column: 1 / -1; }
+      .type-grid { grid-template-columns: 1fr; }
+      .specimen-controls { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Token Admin</h1>
+  <h1>Design System</h1>
   <div class="header-actions">
-    <a href="/" style="font-size:12px;color:#666;text-decoration:none;">← Back to site</a>
-    <button class="btn btn-secondary" onclick="resetAll()">Reset all</button>
-    <button class="btn btn-primary" onclick="copyCSS()">Copy CSS</button>
+    <a href="/" class="back-link">← Site</a>
+    <button class="btn btn-secondary" id="resetBtn">Reset</button>
+    <button class="btn btn-primary" id="copyBtn">Copy CSS</button>
   </div>
 </header>
 
-<div class="notice">
-  Changes here update the live preview on the right. When you're happy, click <strong>Copy CSS</strong> and paste the output into <code>assets/style.css</code> to apply it to the real site.
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="tokens">Tokens</button>
+  <button class="tab-btn" data-tab="typography">Typography</button>
 </div>
 
-<div class="layout">
-  <div class="token-groups" id="tokenGroups"></div>
-
-  <div>
+<!-- ── TOKENS TAB ── -->
+<div class="tab-panel active" id="tab-tokens">
+  <div class="notice">
+    Edit tokens below — the preview updates live. Click <strong>Copy CSS</strong> to get the updated <code>:root {}</code> block, then paste it into <code>assets/style.css</code>.
+  </div>
+  <div class="tokens-layout">
+    <div class="token-groups" id="tokenGroups"></div>
     <div class="preview-panel">
-      <h3>Live Preview</h3>
-      <div class="preview-site" id="previewSite">
-        <div class="preview-nav">
-          <div class="preview-logo">McKenzie Carlile</div>
+      <div class="panel-label">Live preview</div>
+      <div class="preview-site">
+        <div class="preview-nav" id="previewNav">
+          <div class="preview-logo" id="previewLogo">McKenzie Carlile</div>
           <div class="preview-links">
             <span class="preview-link">Field reports</span>
             <span class="preview-link">Contact</span>
           </div>
         </div>
-        <div class="preview-hero" id="previewHero">Designer, explorer.</div>
-        <div class="preview-body">
+        <div class="preview-hero" id="previewHero">Designing products and collecting inspiration in the field.</div>
+        <div class="preview-body" id="previewBody">
           <div class="preview-body-text">Product designer at the intersection of AI, human-centered design, and cloud computing.</div>
-          <div id="previewDivider" class="preview-divider"></div>
+          <div class="preview-divider pv-div"></div>
           <div class="preview-row">
             <div>
               <div class="preview-row-title">Waymo</div>
               <div class="preview-row-sub">Autonomous vehicle experience</div>
             </div>
-            <span style="font-size:11px;color:#ccc;">↗</span>
+            <span style="font-size:11px;color:#ccc">→</span>
           </div>
-          <div class="preview-divider" id="previewDivider2"></div>
+          <div class="preview-divider pv-div"></div>
           <div class="preview-row">
             <div>
               <div class="preview-row-title">Google</div>
               <div class="preview-row-sub">Developer tools platform</div>
             </div>
-            <span style="font-size:11px;color:#ccc;">↗</span>
+            <span style="font-size:11px;color:#ccc">→</span>
           </div>
         </div>
       </div>
-
       <div class="export-section">
-        <h3>Generated CSS</h3>
-        <textarea class="export-area" id="exportArea" rows="14" readonly></textarea>
+        <div class="panel-label" style="margin-top:20px">Generated CSS</div>
+        <textarea class="export-area" id="exportArea" rows="12" readonly></textarea>
         <div class="copy-confirm" id="copyConfirm"></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ── TYPOGRAPHY TAB ── -->
+<div class="tab-panel" id="tab-typography">
+  <div class="notice">
+    Edit any property — the specimen updates live. Only modified styles appear in the export. Paste the output at the end of <code>assets/style.css</code>.
+  </div>
+  <div id="typeSpecimens"></div>
+  <div style="margin-top:40px">
+    <div class="panel-label">Modified styles</div>
+    <textarea class="type-export-area" id="typeExportArea" rows="10" readonly></textarea>
+    <div class="type-actions">
+      <button class="btn btn-primary" id="copyTypeBtn">Copy type CSS</button>
+      <button class="btn btn-secondary" id="resetTypeBtn">Reset type</button>
+      <div class="copy-confirm" id="typeCopyConfirm"></div>
+    </div>
+  </div>
+</div>
+
 <script>
-  const TOKENS = {
-    "Reference — Colors": {
-      type: "ref",
-      tokens: {
-        "--ref-white":     { value: "#ffffff", isColor: true },
-        "--ref-off-white": { value: "#f5f4f1", isColor: true },
-        "--ref-gray-100":  { value: "#e8e6e2", isColor: true },
-        "--ref-gray-300":  { value: "#cccccc", isColor: true },
-        "--ref-gray-500":  { value: "#aaaaaa", isColor: true },
-        "--ref-gray-600":  { value: "#999999", isColor: true },
-        "--ref-gray-700":  { value: "#666666", isColor: true },
-        "--ref-gray-800":  { value: "#555555", isColor: true },
-        "--ref-gray-900":  { value: "#444444", isColor: true },
-        "--ref-black":     { value: "#1a1a1a", isColor: true },
-        "--ref-green-100": { value: "#b8c4b0", isColor: true },
-        "--ref-green-200": { value: "#a0b4a8", isColor: true },
-        "--ref-teal-200":  { value: "#8ea89e", isColor: true },
-      }
-    },
-    "Reference — Spacing": {
-      type: "ref",
-      tokens: {
-        "--ref-size-4":  { value: "4px" },
-        "--ref-size-8":  { value: "8px" },
-        "--ref-size-12": { value: "12px" },
-        "--ref-size-16": { value: "16px" },
-        "--ref-size-20": { value: "20px" },
-        "--ref-size-24": { value: "24px" },
-        "--ref-size-32": { value: "32px" },
-        "--ref-size-48": { value: "48px" },
-        "--ref-size-64": { value: "64px" },
-        "--ref-size-80": { value: "80px" },
-        "--ref-size-88": { value: "88px" },
-      }
-    },
-    "Reference — Radii & Typography": {
-      type: "ref",
-      tokens: {
-        "--ref-radius-sm":  { value: "3px" },
-        "--ref-radius-md":  { value: "4px" },
-        "--ref-font-serif": { value: "'EB Garamond', Georgia, serif" },
-        "--ref-font-sans":  { value: "'Geist', system-ui, sans-serif" },
-      }
-    },
-    "System — Colors": {
-      type: "sys",
-      tokens: {
-        "--color-bg":             { value: "var(--ref-white)", isColor: false },
-        "--color-surface":        { value: "var(--ref-off-white)" },
-        "--color-border":         { value: "var(--ref-gray-100)" },
-        "--color-text-primary":   { value: "var(--ref-black)" },
-        "--color-text-secondary": { value: "var(--ref-gray-700)" },
-        "--color-text-tertiary":  { value: "var(--ref-gray-500)" },
-        "--color-text-muted":     { value: "var(--ref-gray-600)" },
-        "--color-thumb-1":        { value: "var(--ref-green-100)" },
-        "--color-thumb-2":        { value: "var(--ref-teal-200)" },
-        "--color-thumb-3":        { value: "var(--ref-green-200)" },
-      }
-    },
-    "System — Layout": {
-      type: "sys",
-      tokens: {
-        "--font-serif":   { value: "var(--ref-font-serif)" },
-        "--font-sans":    { value: "var(--ref-font-sans)" },
-        "--space-page":   { value: "var(--ref-size-16)" },
-        "--space-section":{ value: "var(--ref-size-80)" },
-        "--space-gap":    { value: "var(--ref-size-8)" },
-        "--radius-card":  { value: "var(--ref-radius-md)" },
-        "--radius-thumb": { value: "var(--ref-radius-sm)" },
-      }
-    }
-  };
+// ── TOKEN DATA ────────────────────────────────────────────────────────────
 
-  const state = {};
+const TOKENS = {
+  "Reference — Colors": { type: "ref", tokens: {
+    "--ref-white":     { value: "#ffffff", isColor: true },
+    "--ref-off-white": { value: "#f5f4f1", isColor: true },
+    "--ref-gray-100":  { value: "#e8e6e2", isColor: true },
+    "--ref-gray-300":  { value: "#cccccc", isColor: true },
+    "--ref-gray-500":  { value: "#aaaaaa", isColor: true },
+    "--ref-gray-600":  { value: "#999999", isColor: true },
+    "--ref-gray-700":  { value: "#666666", isColor: true },
+    "--ref-gray-800":  { value: "#555555", isColor: true },
+    "--ref-gray-900":  { value: "#444444", isColor: true },
+    "--ref-black":     { value: "#1a1a1a", isColor: true },
+    "--ref-green-100": { value: "#b8c4b0", isColor: true },
+    "--ref-green-200": { value: "#a0b4a8", isColor: true },
+    "--ref-teal-200":  { value: "#8ea89e", isColor: true },
+  }},
+  "Reference — Spacing": { type: "ref", tokens: {
+    "--ref-size-4":  { value: "4px" },
+    "--ref-size-8":  { value: "8px" },
+    "--ref-size-12": { value: "12px" },
+    "--ref-size-16": { value: "16px" },
+    "--ref-size-20": { value: "20px" },
+    "--ref-size-24": { value: "24px" },
+    "--ref-size-32": { value: "32px" },
+    "--ref-size-48": { value: "48px" },
+    "--ref-size-64": { value: "64px" },
+    "--ref-size-80": { value: "80px" },
+    "--ref-size-88": { value: "88px" },
+  }},
+  "Reference — Typography": { type: "ref", tokens: {
+    "--ref-font-serif": { value: "'EB Garamond', Georgia, serif" },
+    "--ref-font-sans":  { value: "'Geograph', 'Geist', system-ui, sans-serif" },
+    "--ref-radius-sm":  { value: "3px" },
+    "--ref-radius-md":  { value: "4px" },
+  }},
+  "System — Colors": { type: "sys", tokens: {
+    "--color-bg":             { value: "var(--ref-white)" },
+    "--color-surface":        { value: "var(--ref-off-white)" },
+    "--color-border":         { value: "var(--ref-gray-100)" },
+    "--color-text-primary":   { value: "var(--ref-black)" },
+    "--color-text-secondary": { value: "var(--ref-gray-700)" },
+    "--color-text-tertiary":  { value: "var(--ref-gray-500)" },
+    "--color-text-muted":     { value: "var(--ref-gray-600)" },
+    "--color-thumb-1":        { value: "var(--ref-green-100)" },
+    "--color-thumb-2":        { value: "var(--ref-teal-200)" },
+    "--color-thumb-3":        { value: "var(--ref-green-200)" },
+  }},
+  "System — Layout": { type: "sys", tokens: {
+    "--font-serif":    { value: "var(--ref-font-serif)" },
+    "--font-sans":     { value: "var(--ref-font-sans)" },
+    "--space-page":    { value: "var(--ref-size-16)" },
+    "--space-section": { value: "var(--ref-size-80)" },
+    "--space-gap":     { value: "var(--ref-size-8)" },
+    "--radius-card":   { value: "var(--ref-radius-md)" },
+    "--radius-thumb":  { value: "var(--ref-radius-sm)" },
+  }},
+};
 
-  function init() {
-    Object.entries(TOKENS).forEach(([groupName, group]) => {
-      Object.entries(group.tokens).forEach(([name, def]) => {
-        state[name] = def.value;
-      });
-    });
-    renderGroups();
-    updateExport();
-    updatePreview();
-  }
+// ── TYPOGRAPHY DATA ───────────────────────────────────────────────────────
 
-  function renderGroups() {
-    const container = document.getElementById("tokenGroups");
-    container.innerHTML = "";
+const SANS = "'Geograph', 'Geist', system-ui, sans-serif";
+const SERIF = "'EB Garamond', Georgia, serif";
 
-    Object.entries(TOKENS).forEach(([groupName, group]) => {
-      const section = document.createElement("div");
-      section.className = "token-group";
+const TYPOGRAPHY = [
+  { section: "Display", items: [
+    { id: "hero-title", name: "Hero Title", selector: ".hero-title",
+      sample: "Designing products and collecting inspiration in the field.", dark: true,
+      props: { "font-family": SERIF, "font-size": "clamp(38px, 5.5vw, 76px)", "font-weight": "400", "font-style": "italic", "letter-spacing": "-0.01em", "line-height": "1.1" } },
+    { id: "about-h2", name: "About Heading", selector: ".about h2",
+      sample: "Hello! I'm McKenzie, a product designer working at the intersection of AI and human-centered design.",
+      props: { "font-family": SERIF, "font-size": "clamp(22px, 2.5vw, 30px)", "font-weight": "400", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.35" } },
+    { id: "report-hero-title", name: "Report Hero Title", selector: ".report-hero-meta h1",
+      sample: "South Fork of the Flathead", dark: true,
+      props: { "font-family": SERIF, "font-size": "clamp(28px, 4vw, 52px)", "font-weight": "400", "font-style": "italic", "letter-spacing": "0em", "line-height": "1.15" } },
+    { id: "case-title", name: "Case Study Title", selector: ".case-hero h1",
+      sample: "Waymo",
+      props: { "font-family": SERIF, "font-size": "clamp(32px, 5vw, 60px)", "font-weight": "400", "font-style": "italic", "letter-spacing": "0em", "line-height": "1.1" } },
+    { id: "contact-title", name: "Contact Title", selector: ".contact-wrap h1",
+      sample: "Say hello.",
+      props: { "font-family": SERIF, "font-size": "clamp(28px, 3.5vw, 44px)", "font-weight": "400", "font-style": "italic", "letter-spacing": "0em", "line-height": "1.2" } },
+  ]},
+  { section: "Body & Reading", items: [
+    { id: "body-copy", name: "Body Copy", selector: ".about p, .report-body p",
+      sample: "What I love most about design is the process of observing how people use and live within complicated systems, finding opportunities for improvement, and working with talented people to create beautiful and simple solutions.",
+      props: { "font-family": SANS, "font-size": "15px", "font-weight": "300", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.8" } },
+    { id: "case-body", name: "Case Study Body", selector: ".case-body p",
+      sample: "The challenge was to design an experience that builds trust with riders while communicating complex autonomous system states in a clear, calm, and human way.",
+      props: { "font-family": SANS, "font-size": "15px", "font-weight": "300", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.85" } },
+    { id: "blockquote", name: "Blockquote", selector: ".case-body blockquote p",
+      sample: "\"The goal isn't to feel like technology — it should feel like being driven by someone who really knows what they're doing.\"",
+      props: { "font-family": SERIF, "font-size": "19px", "font-weight": "400", "font-style": "italic", "letter-spacing": "0em", "line-height": "1.5" } },
+    { id: "case-sub", name: "Case Subtitle", selector: ".case-hero-sub",
+      sample: "Designing the rider experience for the world's first fully autonomous commercial ride service.",
+      props: { "font-family": SANS, "font-size": "15px", "font-weight": "300", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.7" } },
+  ]},
+  { section: "UI & Labels", items: [
+    { id: "nav-logo", name: "Nav Logo", selector: ".nav-logo",
+      sample: "McKenzie Carlile",
+      props: { "font-family": SERIF, "font-size": "17px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0.01em", "line-height": "1.3" } },
+    { id: "nav-link", name: "Nav Link", selector: ".nav-links a",
+      sample: "Field reports",
+      props: { "font-family": SANS, "font-size": "13px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0.01em", "line-height": "1.3" } },
+    { id: "section-label", name: "Section Label", selector: ".section-label",
+      sample: "PRODUCT DESIGN",
+      props: { "font-family": SANS, "font-size": "10px", "font-weight": "500", "font-style": "normal", "letter-spacing": "0.18em", "line-height": "1.3" } },
+    { id: "case-h2", name: "Case Section Heading", selector: ".case-body h2",
+      sample: "The challenge",
+      props: { "font-family": SERIF, "font-size": "clamp(22px, 2.5vw, 30px)", "font-weight": "400", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.3" } },
+    { id: "case-h3", name: "Case Sub-heading", selector: ".case-body h3",
+      sample: "RESEARCH FINDINGS",
+      props: { "font-family": SANS, "font-size": "13px", "font-weight": "500", "font-style": "normal", "letter-spacing": "0.06em", "line-height": "1.3" } },
+    { id: "case-meta-label", name: "Case Meta Label", selector: ".case-meta-label",
+      sample: "ROLE",
+      props: { "font-family": SANS, "font-size": "10px", "font-weight": "500", "font-style": "normal", "letter-spacing": "0.12em", "line-height": "1.3" } },
+    { id: "case-meta-value", name: "Case Meta Value", selector: ".case-meta-value",
+      sample: "Lead Product Designer",
+      props: { "font-family": SANS, "font-size": "13px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.3" } },
+    { id: "footer", name: "Footer", selector: "footer span",
+      sample: "© 2025 McKenzie Carlile",
+      props: { "font-family": SANS, "font-size": "12px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0.02em", "line-height": "1.3" } },
+  ]},
+  { section: "List Items & Cards", items: [
+    { id: "work-item-title", name: "Work Item Title", selector: ".work-item-title",
+      sample: "Waymo",
+      props: { "font-family": SERIF, "font-size": "20px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.3" } },
+    { id: "work-item-sub", name: "Work Item Subtitle", selector: ".work-item-sub",
+      sample: "Autonomous vehicle experience",
+      props: { "font-family": SANS, "font-size": "12px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0.02em", "line-height": "1.3" } },
+    { id: "timeline-role", name: "Timeline Role", selector: ".timeline-role",
+      sample: "Staff Product Designer",
+      props: { "font-family": SERIF, "font-size": "20px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.3" } },
+    { id: "timeline-company", name: "Timeline Company", selector: ".timeline-company",
+      sample: "Waymo",
+      props: { "font-family": SANS, "font-size": "12px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0.02em", "line-height": "1.3" } },
+    { id: "timeline-period", name: "Timeline Period", selector: ".timeline-period",
+      sample: "2022 — Present",
+      props: { "font-family": SANS, "font-size": "11px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0.05em", "line-height": "1.3" } },
+    { id: "field-label", name: "Field Thumb Label", selector: ".field-thumb-label",
+      sample: "South Fork of the Flathead", dark: true,
+      props: { "font-family": SERIF, "font-size": "13px", "font-weight": "400", "font-style": "italic", "letter-spacing": "0em", "line-height": "1.4" } },
+    { id: "report-date", name: "Report Date", selector: ".report-date",
+      sample: "JULY 2024",
+      props: { "font-family": SANS, "font-size": "12px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0.08em", "line-height": "1.3" } },
+    { id: "contact-link", name: "Contact Link", selector: ".contact-link-label",
+      sample: "LinkedIn",
+      props: { "font-family": SERIF, "font-size": "18px", "font-weight": "400", "font-style": "normal", "letter-spacing": "0em", "line-height": "1.3" } },
+  ]},
+];
 
-      const h2 = document.createElement("h2");
-      h2.textContent = groupName;
-      section.appendChild(h2);
+const TYPE_PROPS = ["font-family","font-size","font-weight","font-style","letter-spacing","line-height"];
+const PROP_LABELS = { "font-family":"Family","font-size":"Size","font-weight":"Weight","font-style":"Style","letter-spacing":"Tracking","line-height":"Line-h" };
 
-      const rows = document.createElement("div");
-      rows.className = "token-rows";
+// ── STATE ─────────────────────────────────────────────────────────────────
 
-      Object.entries(group.tokens).forEach(([name, def]) => {
-        const row = document.createElement("div");
-        row.className = "token-row";
+const tokenState = {};
+const typeState = {};
 
-        const nameEl = document.createElement("div");
-        nameEl.className = "token-name";
-        nameEl.textContent = name;
+// ── TOKEN RENDERING ───────────────────────────────────────────────────────
 
-        const valueWrap = document.createElement("div");
-        valueWrap.className = "token-value-wrap";
+function initTokens() {
+  Object.values(TOKENS).forEach(g => {
+    Object.entries(g.tokens).forEach(([n, d]) => { tokenState[n] = d.value; });
+  });
+  renderTokenGroups();
+  updateTokenExport();
+  updateTokenPreview();
+}
 
-        if (def.isColor) {
-          const swatch = document.createElement("div");
-          swatch.className = "color-swatch";
-          swatch.style.background = def.value;
-
-          const picker = document.createElement("input");
-          picker.type = "color";
-          picker.value = def.value;
-          picker.addEventListener("input", e => {
-            const val = e.target.value;
-            state[name] = val;
-            swatch.style.background = val;
-            input.value = val;
-            input.classList.add("modified");
-            updateExport();
-            updatePreview();
-          });
-          swatch.appendChild(picker);
-          valueWrap.appendChild(swatch);
-        }
-
-        const input = document.createElement("input");
-        input.type = "text";
-        input.className = "token-input";
-        input.value = def.value;
-        input.dataset.name = name;
-
-        if (state[name] !== def.value) {
-          input.classList.add("modified");
-          input.value = state[name];
-        }
-
-        input.addEventListener("input", e => {
-          const val = e.target.value;
-          state[name] = val;
-          e.target.classList.toggle("modified", val !== def.value);
-          if (def.isColor) {
-            const swatch = e.target.previousElementSibling;
-            if (swatch) swatch.style.background = val;
-          }
-          updateExport();
-          updatePreview();
+function renderTokenGroups() {
+  const container = document.getElementById("tokenGroups");
+  container.innerHTML = "";
+  Object.entries(TOKENS).forEach(([groupName, group]) => {
+    const section = document.createElement("div");
+    const h2 = document.createElement("div");
+    h2.className = "token-group-title";
+    h2.textContent = groupName;
+    section.appendChild(h2);
+    const rows = document.createElement("div");
+    rows.className = "token-rows";
+    Object.entries(group.tokens).forEach(([name, def]) => {
+      const row = document.createElement("div");
+      row.className = "token-row";
+      const nameEl = document.createElement("div");
+      nameEl.className = "token-name";
+      nameEl.textContent = name;
+      const valueWrap = document.createElement("div");
+      valueWrap.className = "token-value-wrap";
+      let picker = null;
+      if (def.isColor) {
+        const swatch = document.createElement("div");
+        swatch.className = "color-swatch";
+        swatch.style.background = tokenState[name];
+        picker = document.createElement("input");
+        picker.type = "color";
+        picker.value = tokenState[name];
+        picker.addEventListener("input", e => {
+          tokenState[name] = e.target.value;
+          swatch.style.background = e.target.value;
+          input.value = e.target.value;
+          input.classList.toggle("modified", e.target.value !== def.value);
+          updateTokenExport(); updateTokenPreview();
         });
-
-        valueWrap.appendChild(input);
-
-        const badge = document.createElement("span");
-        badge.className = "token-type-badge " + (group.type === "ref" ? "badge-ref" : "badge-sys");
-        badge.textContent = group.type;
-
-        row.appendChild(nameEl);
-        row.appendChild(valueWrap);
-        row.appendChild(badge);
-        rows.appendChild(row);
+        swatch.appendChild(picker);
+        valueWrap.appendChild(swatch);
+      }
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "token-input";
+      input.value = tokenState[name];
+      input.classList.toggle("modified", tokenState[name] !== def.value);
+      input.addEventListener("input", e => {
+        tokenState[name] = e.target.value;
+        e.target.classList.toggle("modified", e.target.value !== def.value);
+        if (picker && e.target.value.startsWith("#")) picker.value = e.target.value;
+        updateTokenExport(); updateTokenPreview();
       });
-
-      section.appendChild(rows);
-      container.appendChild(section);
+      valueWrap.appendChild(input);
+      const badge = document.createElement("span");
+      badge.className = "badge " + (group.type === "ref" ? "badge-ref" : "badge-sys");
+      badge.textContent = group.type;
+      row.appendChild(nameEl); row.appendChild(valueWrap); row.appendChild(badge);
+      rows.appendChild(row);
     });
-  }
+    section.appendChild(rows);
+    container.appendChild(section);
+  });
+}
 
-  function updatePreview() {
-    const get = name => state[name] || "";
+function resolveToken(val) {
+  const m = val && val.match(/var\((--[\w-]+)\)/);
+  return m ? (tokenState[m[1]] || val) : val;
+}
 
-    const resolveColor = val => {
-      const match = val.match(/var\((--[\w-]+)\)/);
-      if (match) return state[match[1]] || val;
-      return val;
-    };
+function updateTokenPreview() {
+  const g = n => tokenState[n] || "";
+  document.getElementById("previewHero").style.background = resolveToken(g("--color-thumb-1"));
+  document.getElementById("previewBody").style.background = resolveToken(g("--color-bg"));
+  document.querySelectorAll(".preview-row-title").forEach(el => {
+    el.style.fontFamily = g("--ref-font-serif");
+    el.style.color = resolveToken(g("--color-text-primary"));
+  });
+  document.querySelectorAll(".preview-row-sub, .preview-body-text, .preview-link").forEach(el => {
+    el.style.fontFamily = g("--ref-font-sans");
+    el.style.color = resolveToken(g("--color-text-secondary"));
+  });
+  document.querySelectorAll(".pv-div").forEach(el => {
+    el.style.background = resolveToken(g("--color-border"));
+  });
+  document.getElementById("previewLogo").style.fontFamily = g("--ref-font-serif");
+  document.getElementById("previewLogo").style.color = resolveToken(g("--color-text-primary"));
+  document.getElementById("previewNav").style.borderBottomColor = resolveToken(g("--color-border"));
+}
 
-    const hero = document.getElementById("previewHero");
-    hero.style.background = resolveColor(get("--color-thumb-1"));
+function updateTokenExport() {
+  const lines = [":root {", "  /* ── REFERENCE TOKENS ── */"];
+  Object.entries(TOKENS).forEach(([name, group]) => {
+    if (group.type !== "ref") return;
+    lines.push(`  /* ${name} */`);
+    Object.keys(group.tokens).forEach(k => lines.push(`  ${k}: ${tokenState[k]};`));
+    lines.push("");
+  });
+  lines.push("  /* ── SYSTEM TOKENS ── */");
+  Object.entries(TOKENS).forEach(([name, group]) => {
+    if (group.type !== "sys") return;
+    lines.push(`  /* ${name} */`);
+    Object.keys(group.tokens).forEach(k => lines.push(`  ${k}: ${tokenState[k]};`));
+    lines.push("");
+  });
+  lines.push("}");
+  document.getElementById("exportArea").value = lines.join("\n");
+}
 
-    const site = document.getElementById("previewSite");
-    site.style.background = resolveColor(get("--color-bg"));
+// ── TYPOGRAPHY RENDERING ──────────────────────────────────────────────────
 
-    document.querySelectorAll(".preview-row-title").forEach(el => {
-      el.style.fontFamily = get("--ref-font-serif") || "'EB Garamond', serif";
-      el.style.color = resolveColor(get("--color-text-primary"));
-    });
+function initType() {
+  TYPOGRAPHY.forEach(({ items }) => {
+    items.forEach(item => { typeState[item.id] = { ...item.props }; });
+  });
+  renderTypeSpecimens();
+  updateTypeExport();
+}
 
-    document.querySelectorAll(".preview-row-sub, .preview-body-text, .preview-link").forEach(el => {
-      el.style.color = resolveColor(get("--color-text-secondary"));
-    });
-
-    document.querySelectorAll(".preview-divider").forEach(el => {
-      el.style.background = resolveColor(get("--color-border"));
-    });
-
-    document.querySelector(".preview-logo").style.fontFamily =
-      get("--ref-font-serif") || "'EB Garamond', serif";
-    document.querySelector(".preview-logo").style.color = resolveColor(get("--color-text-primary"));
-    document.querySelector(".preview-nav").style.borderBottomColor = resolveColor(get("--color-border"));
-  }
-
-  function updateExport() {
-    const lines = [":root {"];
-
-    const refTokens = [];
-    const sysTokens = [];
-
-    Object.entries(TOKENS).forEach(([groupName, group]) => {
-      const isRef = group.type === "ref";
-      const sectionLines = [`  /* ${groupName} */`];
-      Object.keys(group.tokens).forEach(name => {
-        sectionLines.push(`  ${name}: ${state[name]};`);
+function renderTypeSpecimens() {
+  const container = document.getElementById("typeSpecimens");
+  container.innerHTML = "";
+  TYPOGRAPHY.forEach(({ section, items }) => {
+    const hdr = document.createElement("div");
+    hdr.className = "type-section-header";
+    hdr.textContent = section;
+    container.appendChild(hdr);
+    const grid = document.createElement("div");
+    grid.className = "type-grid";
+    items.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "specimen-card";
+      const meta = document.createElement("div");
+      meta.className = "specimen-meta";
+      const nameEl = document.createElement("div");
+      nameEl.className = "specimen-name";
+      nameEl.textContent = item.name;
+      const tagEl = document.createElement("div");
+      tagEl.className = "specimen-tag";
+      tagEl.textContent = (item.props["font-family"] || "").includes("Garamond") ? "Serif" : "Sans";
+      meta.appendChild(nameEl); meta.appendChild(tagEl);
+      card.appendChild(meta);
+      const render = document.createElement("div");
+      render.className = "specimen-render" + (item.dark ? " dark" : "");
+      const textEl = document.createElement("div");
+      textEl.id = "text-" + item.id;
+      textEl.textContent = item.sample;
+      applyTypeStyle(textEl, typeState[item.id], item.dark);
+      render.appendChild(textEl);
+      card.appendChild(render);
+      const controls = document.createElement("div");
+      controls.className = "specimen-controls";
+      TYPE_PROPS.forEach(prop => {
+        const cell = document.createElement("div");
+        cell.className = "control-cell";
+        const lbl = document.createElement("div");
+        lbl.className = "control-label";
+        lbl.textContent = PROP_LABELS[prop];
+        const inp = document.createElement("input");
+        inp.className = "control-input";
+        inp.type = "text";
+        inp.value = typeState[item.id][prop] || "";
+        inp.classList.toggle("modified", inp.value !== item.props[prop]);
+        inp.addEventListener("input", e => {
+          typeState[item.id][prop] = e.target.value;
+          e.target.classList.toggle("modified", e.target.value !== item.props[prop]);
+          applyTypeStyle(document.getElementById("text-" + item.id), typeState[item.id], item.dark);
+          updateTypeExport();
+        });
+        cell.appendChild(lbl); cell.appendChild(inp);
+        controls.appendChild(cell);
       });
-      sectionLines.push("");
-      if (isRef) refTokens.push(...sectionLines);
-      else sysTokens.push(...sectionLines);
+      card.appendChild(controls);
+      grid.appendChild(card);
     });
+    container.appendChild(grid);
+  });
+}
 
-    lines.push("  /* ── REFERENCE TOKENS ── */", ...refTokens);
-    lines.push("  /* ── SYSTEM TOKENS ── */", ...sysTokens);
-    lines.push("}");
+function applyTypeStyle(el, props, dark) {
+  TYPE_PROPS.forEach(p => { el.style[p.replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = props[p] || ""; });
+  el.style.color = dark ? "rgba(255,255,255,0.9)" : "#1a1a1a";
+  el.style.maxWidth = "100%";
+}
 
-    document.getElementById("exportArea").value = lines.join("\n");
-  }
-
-  function copyCSS() {
-    const text = document.getElementById("exportArea").value;
-    navigator.clipboard.writeText(text).then(() => {
-      const el = document.getElementById("copyConfirm");
-      el.textContent = "Copied to clipboard.";
-      setTimeout(() => { el.textContent = ""; }, 2500);
+function updateTypeExport() {
+  const lines = ["/* Typography overrides — paste at end of assets/style.css */"];
+  let any = false;
+  TYPOGRAPHY.forEach(({ items }) => {
+    items.forEach(item => {
+      const changed = TYPE_PROPS.filter(p => typeState[item.id][p] !== item.props[p]);
+      if (!changed.length) return;
+      any = true;
+      lines.push(`\n${item.selector} {`);
+      changed.forEach(p => lines.push(`  ${p}: ${typeState[item.id][p]};`));
+      lines.push("}");
     });
-  }
+  });
+  document.getElementById("typeExportArea").value = any
+    ? lines.join("\n")
+    : "/* No changes yet — edit the controls above */";
+}
 
-  function resetAll() {
-    if (!confirm("Reset all tokens to their default values?")) return;
-    Object.entries(TOKENS).forEach(([, group]) => {
-      Object.entries(group.tokens).forEach(([name, def]) => {
-        state[name] = def.value;
-      });
+// ── UTILS ─────────────────────────────────────────────────────────────────
+
+function flash(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  setTimeout(() => { el.textContent = ""; }, 2500);
+}
+
+// ── WIRE UP BUTTONS ───────────────────────────────────────────────────────
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.getElementById("tab-" + tab).classList.add("active");
+    btn.classList.add("active");
+    // Update copy/reset button targets based on active tab
+    activeTab = tab;
+  });
+});
+
+let activeTab = "tokens";
+
+document.getElementById("copyBtn").addEventListener("click", () => {
+  if (activeTab === "tokens") {
+    navigator.clipboard.writeText(document.getElementById("exportArea").value)
+      .then(() => flash("copyConfirm", "Copied to clipboard."));
+  } else {
+    navigator.clipboard.writeText(document.getElementById("typeExportArea").value)
+      .then(() => flash("typeCopyConfirm", "Copied to clipboard."));
+  }
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if (activeTab === "tokens") {
+    if (!confirm("Reset all tokens to defaults?")) return;
+    Object.values(TOKENS).forEach(g => {
+      Object.entries(g.tokens).forEach(([n, d]) => { tokenState[n] = d.value; });
     });
-    renderGroups();
-    updateExport();
-    updatePreview();
+    renderTokenGroups(); updateTokenExport(); updateTokenPreview();
+  } else {
+    if (!confirm("Reset all type styles to defaults?")) return;
+    TYPOGRAPHY.forEach(({ items }) => {
+      items.forEach(item => { typeState[item.id] = { ...item.props }; });
+    });
+    renderTypeSpecimens(); updateTypeExport();
   }
+});
 
-  init();
+document.getElementById("copyTypeBtn").addEventListener("click", () => {
+  navigator.clipboard.writeText(document.getElementById("typeExportArea").value)
+    .then(() => flash("typeCopyConfirm", "Copied to clipboard."));
+});
+
+document.getElementById("resetTypeBtn").addEventListener("click", () => {
+  if (!confirm("Reset all type styles to defaults?")) return;
+  TYPOGRAPHY.forEach(({ items }) => {
+    items.forEach(item => { typeState[item.id] = { ...item.props }; });
+  });
+  renderTypeSpecimens(); updateTypeExport();
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+
+initTokens();
+initType();
 </script>
 </body>
 </html>

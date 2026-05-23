@@ -1,3 +1,37 @@
+/* ── GEOGRAPH FONT SETUP ──────────────────────────────────────────────────
+   Priority order per weight:
+   1. local() — picks up a demo/purchased font installed on your Mac
+   2. url()   — served from assets/fonts/ once you drop the files in
+   3. Geist   — existing sans fallback
+   ──────────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Geograph';
+  src: local('Geograph-Light'), local('Geograph Light'),
+       url('fonts/test-geograph-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geograph';
+  src: local('Geograph-Regular'), local('Geograph Regular'), local('Geograph'),
+       url('fonts/test-geograph-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geograph';
+  src: local('Geograph-Medium'), local('Geograph Medium'),
+       url('fonts/test-geograph-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -31,7 +65,7 @@
   --ref-size-88:     88px;
 
   --ref-font-serif:  'EB Garamond', Georgia, serif;
-  --ref-font-sans:   'Geist', system-ui, sans-serif;
+  --ref-font-sans:   'Geograph', 'Geist', system-ui, sans-serif;
 
   --ref-radius-sm:   3px;
   --ref-radius-md:   4px;
