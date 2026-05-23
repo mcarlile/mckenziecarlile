@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSHealthShareUsageDescription</key>
+    <string>DiveLog reads your Apple Watch dive workouts recorded by Oceanic+ to display depth profiles, dive metadata, and plot your dives on the globe.</string>
+
+    <key>NSHealthUpdateUsageDescription</key>
+    <string>DiveLog does not write health data.</string>
+
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>DiveLog uses your location to label new dive sites on the globe.</string>
+
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>DiveLog Shared Dive</string>
+            <key>LSHandlerRank</key>
+            <string>Owner</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>com.divelog.shared-dive</string>
+            </array>
+        </dict>
+    </dict>
+    </array>
+
+    <key>UTExportedTypeDeclarations</key>
+    <array>
+        <dict>
+            <key>UTTypeIdentifier</key>
+            <string>com.divelog.shared-dive</string>
+            <key>UTTypeDescription</key>
+            <string>DiveLog Shared Dive Package</string>
+            <key>UTTypeConformsTo</key>
+            <array>
+                <string>public.data</string>
+            </array>
+            <key>UTTypeTagSpecification</key>
+            <dict>
+                <key>public.filename-extension</key>
+                <array>
+                    <string>divelog</string>
+                </array>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
