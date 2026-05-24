@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBM StoredIQ for Legal — McKenzie Carlile</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">McKenzie Carlile</a>
+  <ul class="nav-links">
+    <li><a href="/field-reports/">Field reports</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="case-hero">
+  <div class="case-hero-inner">
+    <a href="/" class="case-back">← Work</a>
+    <div class="case-hero-label">Product Design</div>
+    <h1>IBM StoredIQ for Legal</h1>
+    <p class="case-hero-sub">Fall 2015 - Summer 2016</p>
+  </div>
+</div>
+
+<div class="case-body">
+
+  <img src="../../assets/images/siq4l-nextcastle.png" alt="IBM StoredIQ for Legal" loading="eager" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
+
+  <h2>The Project</h2>
+
+  <h3>Introduction</h3>
+
+  <p>In November 2015, I joined the IBM Analytics Platform team to help build IBM StoredIQ for Legal, an electronic discovery tool designed to help legal staff and IT departments manage legal matters and respond to litigation.</p>
+
+  <h3>Discovery &amp; Governance 101</h3>
+
+  <p>Modern Fortune 500 companies produce an unfathomable amount of information every single day: everything from HR records and financial statements to cat GIFs posted to Slack. Consider the most common form of electronic data created by organizations: email. An average employee at a large company like IBM sends and receives around 50 emails on a normal work day. After just one year of service, this employee would have racked up 13,000 emails. This means that every year a company like IBM sends and receives about 5 billion emails! Storing this data, either on premise or in the cloud is one of the largest expenses most fortune 500 companies face.</p>
+
+  <p>While retaining this data is costly, when companies are involved in a lawsuit they must be able to produce evidence when requested. In fact, most industries require that companies retain data for a certain amount of time, regardless of the size.</p>
+
+  <p>The focus of StoredIQ for Legal is to give paralegals, attorneys and IT staff the tools they need to discover and produce relevant information when they are facing impending litigation or an internal investigation.</p>
+
+  <h3>My Role</h3>
+
+  <p>I joined the team immediately after the second release launched and was able to participate in the kickoff planning workshop for the third release. As this was my first time working on an IBM release from initial research to the delivery of a final product, I was incredibly excited and nervous to learn all about the nitty gritty details involved in shipping something at this scale. It was really helpful to have an insanely talented group of collaborators to lean on and grow with throughout this release.</p>
+
+  <h3>Product Scope and Competitive Landscape</h3>
+
+  <p>There are many facets to eDiscovery, but our product is only targetted at a certain aspect of the process. The EDRM model shown below is an industry standard way of looking at the entire eDiscovery lifecycle. Our product is only focused on the first half of the model, while other competiting products handle the second half.</p>
+
+  <img src="../../assets/images/siq4l-edrm.png" alt="EDRM model" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
+
+  <h3>The Challenge</h3>
+
+  <p>Previous releases of StoredIQ for Legal had made huge strides towards rethinking IBM's existing portfolio of legal tools into a single, modern product that addresses many aspects of the electronic discovery process. These tools were clunky and not up to the challenge of assisting legal teams in the age of big data. The product itself began as an experiment in a pilot program within IBM Design and was the result of a human-centered redesign of the entire governance portfolio.</p>
+
+  <p>Before this release, the only data sources that a paralegal could identify, preserve and collect data from were servers indexed by another IBM tool called StoredIQ. However, companies are legally responsible for governing and producing data wherever it's stored, not just in places conveniently indexed by StoredIQ. For the third release of the product, I was tasked with designing an experience that improved the data request process.</p>
+
+  <img src="../../assets/images/siq4l-non-storediq-data-sources.png" alt="Non-StoredIQ data sources" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
+
+  <h2>Research</h2>
+
+  <h3>Engaging with real users</h3>
+
+  <p>One of the things that drew me to IBM Design was its commitment to understand and empathize with real human users. Instead of defining success by sales metrics or technical features, IBM Design strives to keep our users as the North Star that guides our product design practice. To help us stay focused on solving human needs and incorporating feedback from real people, we regularly work with several teams of sponsor users from all around the world.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-sponsor-user-program.png" alt="Sponsor user program" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-sponsor-user-1.png" alt="Sponsor user session" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-sponsor-user-2.png" alt="Sponsor user session 2" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Site visit</h3>
+
+  <p>Early in the design process of StoredIQ for Legal, I got to participate in a contextual inquiry and co-design session with one of these groups of sponsor users. For this visit, I went on site with two design researchers and a visual designer to the North American headquarters of a major automobile company based in Los Angeles. Our goal was to understand how paralegals and attorneys collaborate with IT staff to identify, preserve and collect evidence.</p>
+
+  <p>During the visit, I got to observe our users conduct their day to day business using a legacy version of our software. I listened to them describe their processes for handling data relevant to legal matters and how difficult it is to ensure that requested information is complete and defensible. In the first half of the day, we focused on the paralegal experience. After interviewing a few paralegals, we had them create an as-is journey map to illustrate their workflow.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-site-visit-journey-map.png" alt="Site visit journey map" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-site-visit-paper-prototype.png" alt="Site visit paper prototype" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-site-visit-contextual-inquiry.png" alt="Site visit contextual inquiry" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Modeling an eDiscovery User Ecosystem</h3>
+
+  <p>After returning to Austin, I worked with our research team to synthesize our findings. Based on our observations, we developed a user ecosystem model. eDiscovery teams have many players who often occupy different roles at different times. Additionally, different companies use different names for different roles as there isn't yet an industry standard. However, by grouping users who are assigned similar tasks, we created several archetype personas and a model for how they all work together to fulfill data requests.</p>
+
+  <img src="../../assets/images/siq4l-user-ecosystem.png" alt="User ecosystem model" loading="lazy" decoding="async" style="width:100%;border-radius:var(--radius-card);margin-bottom:40px;">
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-persona-paige.png" alt="Persona: Paige" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-persona-dave.png" alt="Persona: Dave" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-persona-stewart.png" alt="Persona: Stewart" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Examining the as-is user journey</h3>
+
+  <p>Once we established who the key players are in an eDiscovery data request workflow and what each of their goals and tasks were, we synthesized a simplified and generalized as-is journey map to understand each phase of the process and identify pain points.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-as-is-1.png" alt="As-is journey map 1" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-as-is-2.png" alt="As-is journey map 2" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-as-is-3.png" alt="As-is journey map 3" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-as-is-4.png" alt="As-is journey map 4" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-as-is-5.png" alt="As-is journey map 5" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Identifying pain points</h3>
+
+  <p>Once the journey was mapped out, we looked for clear points of friction between users. The following two themes stood out clearly and validated our product manager's assumptions.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-pain-point-1.png" alt="Pain point 1" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-pain-point-2.png" alt="Pain point 2" loading="lazy" decoding="async">
+  </div>
+
+  <h2>Production Process</h2>
+
+  <h3>Crafting Hills</h3>
+
+  <p>Armed with a solid understanding of the problem at hand, our team began imagining what successfully solving these pain points would look like. At IBM, we use tools called Hills to align our teams around a common vision for what we are building. Hills focus on user enablement and always define who we are solving for, what that person should be able to do and why it's important.</p>
+
+  <blockquote>
+    <p>Never tell people how to do things. Tell them what to accomplish and they will surprise you with their ingenuity. — General George S. Patton</p>
+  </blockquote>
+
+  <p>The Hill I worked towards solving began its life during the kickoff workshop as the following:</p>
+
+  <blockquote>
+    <p>A legal/IT team can identify, preserve and collect data from a non-StoredIQ data source.</p>
+  </blockquote>
+
+  <p>After several iterations, we landed on a workable Hill:</p>
+
+  <blockquote>
+    <p>Paralegals and IT data staff can work together to identify, preserve and collect data from a non-StoredIQ data source while the status of the process is visible to the entire team in a unified view.</p>
+  </blockquote>
+
+  <h3>Journey mapping</h3>
+
+  <p>After drafting our Hill, we began moving forward with designing a potential to-be journey map for each of our personas that addressed the pain points documented in their as-is journey maps. Because we couldn't design the entire experience in one big chunk of work, we split each of these to-be journey maps into distinct experience phases.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-journey-map.jpg" alt="To-be journey map" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-journey-map-2.jpg" alt="Journey map detail" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-journey-map-3.jpg" alt="Journey map session" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Design goals</h3>
+
+  <p>Establishing a clear set of design and experience goals was helpful in keeping us focused on delivering experiences that directly solved our user's pain points. These served as a measuring stick against which we could compare our work in progress.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-design-goal-1.png" alt="Design goal 1" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-design-goal-2.png" alt="Design goal 2" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-design-goal-3.png" alt="Design goal 3" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-design-goal-4.png" alt="Design goal 4" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-design-goal-5.png" alt="Design goal 5" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-design-goal-6.png" alt="Design goal 6" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-design-goal-7.png" alt="Design goal 7" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Sketching and prototyping</h3>
+
+  <p>I tried to begin the design process of each of my sprints by sketching and white boarding wildly diverging concepts that accomplished the same goal. During this release, I tried my best to resist that temptation and instead shared design concepts at a low fidelity and gained consensus with the rest of the team before moving to higher fidelity.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-sketches-1.jpg" alt="Sketches 1" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-sketches-2.jpg" alt="Sketches 2" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-sketches-3.jpg" alt="Sketches 3" loading="lazy" decoding="async">
+  </div>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-low-fidelity.png" alt="Low fidelity wireframes" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-low-fidelity-2.png" alt="Low fidelity wireframes 2" loading="lazy" decoding="async">
+  </div>
+
+  <h2>Outcomes and impact</h2>
+
+  <p>I'm really proud of what our team was able to build together. We improved a process that was painful for both paralegals and IT teams while helping clients save money and limit their legal risk. As a new product designer, this launch was a humbling and eye-opening experience that has hopefully made me a more empathetic and understanding team member. The most rewarding part of shipping this product was evaluating the final designs against our stated experience goals:</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-request-details.png" alt="Request details" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-tasks.png" alt="Tasks view" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-comments.png" alt="Comments" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-tables.png" alt="Tables" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-work-package.png" alt="Work package" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-custodian-view.png" alt="Custodian view" loading="lazy" decoding="async">
+  </div>
+
+  <h3>Design for self service.</h3>
+  <p>One of the biggest pain points in an eDiscovery team's workflow is a lack of transparency into work being done by others. Make the status of fulfillment team completion accessible to everyone from Dave to the managing attorney.</p>
+
+  <h3>Emphasize what needs to be done right now.</h3>
+  <p>In an eDiscovery team, some tasks are more important than others and emergencies need to be dealt with quickly. Let users assign and edit data request priority to influence the distribution of tasks across roles.</p>
+
+  <h3>Facilitate structured communication.</h3>
+  <p>Try to limit phone calls and email bloat by allowing paralegals and IT to communicate with each other within the app in a legally defensible and open way.</p>
+
+  <h3>Limit dependence on email and spreadsheets.</h3>
+  <p>Excel was never designed to support a collaborative eDiscovery workflow. Give teams the tools to work with large sets of custodial data and work together to fulfill requests.</p>
+
+  <h3>Keep it secure.</h3>
+  <p>When designing experiences for both legal and IT teams, ensure the user is allowed to see the data you are proposing. Obfuscate matter names for IT teams if it's not mission critical.</p>
+
+  <h3>Only show what's necessary and support multiple models of working.</h3>
+  <p>Data requests contain tons of metadata. Hide details and metadata to give the users more space to work with data, but make it easy to drill down into the nitty gritty. Allow users to adjust their view depending on their needs.</p>
+
+  <h2>Appendix</h2>
+
+  <h3>Radical collaboration in the empire on which the sun never sets</h3>
+
+  <p>One of the most challenging and surprising aspects of working on this project at IBM was that our team was so geographically diverse. No two teams working on the project was co-located together. Every day during the design stage of the sprint, I not only collaborated with our design researchers and visual designers on the team, but also with our product manager in San Jose, back-end developers in Vancouver and Germany and UI developers in Japan.</p>
+
+  <p>In May, the team realized that something had to give and we needed to meet in person to figure out how to work more quickly. During this "war room", the design team and I were able to embed with our engineering teams for 2 weeks at the IBM Germany Research and Development center in Boblingen, Germany.</p>
+
+  <div class="report-gallery" style="margin:32px 0 40px;">
+    <img src="../../assets/images/siq4l-skype.jpg" alt="Remote collaboration" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-dinner.jpg" alt="War room dinner" loading="lazy" decoding="async">
+    <img src="../../assets/images/siq4l-dinner-2.jpg" alt="Team dinner 2" loading="lazy" decoding="async">
+  </div>
+
+  <blockquote>
+    <p>Empathy: first with each other. Then with our users. — IBM Design Thinking Field Guide (2015)</p>
+  </blockquote>
+
+  <p>That war room was instrumental in refocusing our vision for what we wanted to build and helped establish the cadence we would follow for the rest of the release schedule. And while we still had to deal with the late night / early meetings, I felt a real connection to the rest of the team and mutual respect for the unique and valuable perspective that each member of the team contributed during our sprints.</p>
+
+</div>
+
+<footer>
+  <span>© 2025 McKenzie Carlile</span>
+  <span>Lake Tahoe, California</span>
+</footer>
+
+</body>
+</html>
