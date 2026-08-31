@@ -1,0 +1,135 @@
+<aside class="panel">
+  <header class="panel-header">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">GeoViz 3D</span>
+    </div>
+    <button type="button" class="basemap-toggle" (click)="state.toggleBasemap()">
+      {{ state.basemap() === 'dark' ? '☾ Dark' : '☀ Light' }}
+    </button>
+  </header>
+
+  <section class="panel-section">
+    <div class="section-label">Dataset</div>
+    <select class="select" [ngModel]="state.selectedDatasetId()" (ngModelChange)="onDatasetChange($event)">
+      @for (dataset of state.datasets; track dataset.id) {
+        <option [value]="dataset.id">{{ dataset.name }}</option>
+      }
+    </select>
+    <p class="dataset-desc">{{ state.selectedDataset().description }}</p>
+  </section>
+
+  <section class="panel-section">
+    <div class="section-label">Layer type</div>
+    <div class="layer-type-badge">
+      <span class="layer-icon">⬡</span>
+      Hexagon
+    </div>
+  </section>
+
+  <section class="panel-section">
+    <div class="section-label">Color</div>
+    <app-palette-picker />
+  </section>
+
+  <section class="panel-section">
+    <label class="field-row">
+      <span>Opacity</span>
+      <span class="field-value">{{ state.opacity() | number: '1.1-1' }}</span>
+    </label>
+    <input
+      class="range"
+      type="range"
+      min="0.05"
+      max="1"
+      step="0.05"
+      [ngModel]="state.opacity()"
+      (ngModelChange)="onOpacityChange($event)"
+    />
+  </section>
+
+  <section class="panel-section">
+    <label class="field-row">
+      <span>Radius (km)</span>
+      <span class="field-value">{{ state.radiusKm() | number: '1.1-1' }}</span>
+    </label>
+    <input
+      class="range"
+      type="range"
+      min="0.5"
+      max="250"
+      step="0.5"
+      [ngModel]="state.radiusKm()"
+      (ngModelChange)="onRadiusChange($event)"
+    />
+  </section>
+
+  <section class="panel-section">
+    <label class="checkbox-row">
+      <span>Enable hex height</span>
+      <input type="checkbox" [ngModel]="state.extruded()" (ngModelChange)="state.extruded.set($event)" />
+    </label>
+
+    @if (state.extruded()) {
+      <label class="field-row sub-field">
+        <span>Height scale</span>
+        <span class="field-value">{{ state.elevationScale() }}×</span>
+      </label>
+      <input
+        class="range"
+        type="range"
+        min="1"
+        max="120"
+        step="1"
+        [ngModel]="state.elevationScale()"
+        (ngModelChange)="onElevationScaleChange($event)"
+      />
+    }
+  </section>
+
+  <section class="panel-section">
+    <div class="section-label">Distribution percentile</div>
+    <label class="field-row">
+      <span>Lower</span>
+      <span class="field-value">{{ state.lowerPercentile() }}%</span>
+    </label>
+    <input
+      class="range"
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      [ngModel]="state.lowerPercentile()"
+      (ngModelChange)="onLowerPercentileChange($event)"
+    />
+    <label class="field-row">
+      <span>Upper</span>
+      <span class="field-value">{{ state.upperPercentile() }}%</span>
+    </label>
+    <input
+      class="range"
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      [ngModel]="state.upperPercentile()"
+      (ngModelChange)="onUpperPercentileChange($event)"
+    />
+  </section>
+
+  <section class="panel-section">
+    <label class="field-row">
+      <span>Coverage</span>
+      <span class="field-value">{{ state.coverage() * 100 | number: '1.0-0' }}%</span>
+    </label>
+    <input
+      class="range"
+      type="range"
+      min="0.1"
+      max="1"
+      step="0.05"
+      [ngModel]="state.coverage()"
+      (ngModelChange)="onCoverageChange($event)"
+    />
+  </section>
+</aside>
