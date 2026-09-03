@@ -101,6 +101,17 @@ This is a static HTML site deployed via Vercel. No build step required.
 **Custom domains**: https://vercel.com/docs/projects/domains  
 **Environment variables** (if needed later): https://vercel.com/docs/projects/environment-variables
 
+### Subdomain: shop.mckenziecarlile.com
+
+The print shop lives at `/shop` in this same repo and project — no separate Vercel project needed. `vercel.json` uses a host-based rewrite so requests to `shop.mckenziecarlile.com/` serve `/shop` while the apex domain keeps serving the homepage.
+
+To go live, two things need to happen outside this repo:
+
+1. **Vercel dashboard** → this project → Settings → Domains → add `shop.mckenziecarlile.com`.
+2. **DNS** (wherever `mckenziecarlile.com` is registered) → add the CNAME record Vercel shows you (typically `shop` → `cname.vercel-dns.com`).
+
+Once DNS propagates, `shop.mckenziecarlile.com` resolves to this project and the host-based rewrite serves `/shop/index.html`. `mckenziecarlile.com/shop/` also works directly, which is useful for previewing before DNS is set up.
+
 ### First deploy (one time)
 
 ```bash
@@ -137,6 +148,7 @@ If you want internal case study pages instead of external links:
 mckenziecarlile/
 ├── index.html                        Homepage
 ├── contact/index.html                Contact page
+├── shop/index.html                   Print shop (shop.mckenziecarlile.com)
 ├── field-reports/
 │   ├── index.html                    Field reports index
 │   ├── ne-couloir-mt-langley/        Field report detail
