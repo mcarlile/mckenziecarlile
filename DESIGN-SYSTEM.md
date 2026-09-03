@@ -103,7 +103,7 @@ This is a static HTML site deployed via Vercel. No build step required.
 
 ### Subdomain: shop.mckenziecarlile.com
 
-The print shop lives at `/shop` in this same repo and project — no separate Vercel project needed. `vercel.json` uses a host-based rewrite so requests to `shop.mckenziecarlile.com/` serve `/shop` while the apex domain keeps serving the homepage.
+The listing page lives at `/shop` in this same repo and project — no separate Vercel project needed. `vercel.json` uses a host-based rewrite so requests to `shop.mckenziecarlile.com/` serve `/shop` while the apex domain keeps serving the homepage.
 
 To go live, two things need to happen outside this repo:
 
@@ -148,7 +148,7 @@ If you want internal case study pages instead of external links:
 mckenziecarlile/
 ├── index.html                        Homepage
 ├── contact/index.html                Contact page
-├── shop/index.html                   Print shop (shop.mckenziecarlile.com)
+├── shop/index.html                   Listing page (shop.mckenziecarlile.com)
 ├── field-reports/
 │   ├── index.html                    Field reports index
 │   ├── ne-couloir-mt-langley/        Field report detail
