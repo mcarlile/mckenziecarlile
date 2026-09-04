@@ -103,7 +103,7 @@ This is a static HTML site deployed via Vercel. No build step for the site itsel
 
 ### Subdomain: shop.mckenziecarlile.com
 
-The listing page lives at `/shop` in this same repo and project — no separate Vercel project needed. Routing is handled by `middleware.js` (Vercel Routing Middleware), which checks the request's `Host` header and rewrites `shop.mckenziecarlile.com/` to `/shop` while every other host keeps serving the homepage normally.
+The listing page lives at `/shop` in this same repo and project — no separate Vercel project needed. It's a standalone camper-for-sale poster page with its own look (Archivo Black + DM Mono, paper/ink/sale-green palette in `shop/style.css`) rather than the main site's design tokens, and its nav only links back to `mckenziecarlile.com`. Routing is handled by `middleware.js` (Vercel Routing Middleware), which checks the request's `Host` header and rewrites `shop.mckenziecarlile.com/` to `/shop` while every other host keeps serving the homepage normally.
 
 > Note: a plain `vercel.json` rewrite with `"has": [{ "type": "host", ... }]` looks like it should do this, but that condition isn't reliably supported outside Next.js — it silently no-ops. Routing Middleware (a `middleware.js` file at the project root) is the supported way to branch on hostname for any project type. It requires the `@vercel/functions` package (see `package.json`) for the `rewrite()` helper, and `"type": "module"` in `package.json` so Vercel treats `middleware.js` as ESM.
 
@@ -150,7 +150,9 @@ If you want internal case study pages instead of external links:
 mckenziecarlile/
 ├── index.html                        Homepage
 ├── contact/index.html                Contact page
-├── shop/index.html                   Listing page (shop.mckenziecarlile.com)
+├── shop/
+│   ├── index.html                    1987 Pilgrim 7330 listing (shop.mckenziecarlile.com)
+│   └── style.css                     Standalone poster-style sheet, not part of the main token system
 ├── field-reports/
 │   ├── index.html                    Field reports index
 │   ├── ne-couloir-mt-langley/        Field report detail
@@ -158,8 +160,8 @@ mckenziecarlile/
 │   └── miter-basin/
 ├── admin/index.html                  Token admin UI
 ├── assets/
-│   ├── style.css                     All styles + token system
-│   └── images/                       Hero and report photos
+│   ├── style.css                     All styles + token system (used by every page except /shop)
+│   └── images/                       Hero, report, and shop listing photos
 ├── middleware.js                     Host-based routing for shop.mckenziecarlile.com
 ├── package.json                      Declares @vercel/functions for middleware.js
 ├── vercel.json                       Vercel routing config
