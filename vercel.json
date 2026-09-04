@@ -1,11 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "shop.mckenziecarlile.com" }],
-      "destination": "/shop"
-    }
-  ]
+  "trailingSlash": false
 }

@@ -91,7 +91,7 @@ Spacing uses an 8-point base scale (`--ref-size-8` through `--ref-size-88`). Pag
 
 ### Vercel (current)
 
-This is a static HTML site deployed via Vercel. No build step required.
+This is a static HTML site deployed via Vercel. No build step for the site itself — `package.json` exists only so Vercel can `npm install` the one dependency (`@vercel/functions`) that `middleware.js` needs.
 
 1. Push to GitHub: `git push`
 2. Vercel auto-deploys on every push to `main`
@@ -103,14 +103,16 @@ This is a static HTML site deployed via Vercel. No build step required.
 
 ### Subdomain: shop.mckenziecarlile.com
 
-The listing page lives at `/shop` in this same repo and project — no separate Vercel project needed. `vercel.json` uses a host-based rewrite so requests to `shop.mckenziecarlile.com/` serve `/shop` while the apex domain keeps serving the homepage.
+The listing page lives at `/shop` in this same repo and project — no separate Vercel project needed. Routing is handled by `middleware.js` (Vercel Routing Middleware), which checks the request's `Host` header and rewrites `shop.mckenziecarlile.com/` to `/shop` while every other host keeps serving the homepage normally.
+
+> Note: a plain `vercel.json` rewrite with `"has": [{ "type": "host", ... }]` looks like it should do this, but that condition isn't reliably supported outside Next.js — it silently no-ops. Routing Middleware (a `middleware.js` file at the project root) is the supported way to branch on hostname for any project type. It requires the `@vercel/functions` package (see `package.json`) for the `rewrite()` helper, and `"type": "module"` in `package.json` so Vercel treats `middleware.js` as ESM.
 
 To go live, two things need to happen outside this repo:
 
 1. **Vercel dashboard** → this project → Settings → Domains → add `shop.mckenziecarlile.com`.
-2. **DNS** (wherever `mckenziecarlile.com` is registered) → add the CNAME record Vercel shows you (typically `shop` → `cname.vercel-dns.com`).
+2. **DNS** (wherever `mckenziecarlile.com` is registered) → add the CNAME record Vercel shows you (typically `shop` → `cname.vercel-dns.com`, though Vercel may show a per-domain value instead — use whatever it actually displays).
 
-Once DNS propagates, `shop.mckenziecarlile.com` resolves to this project and the host-based rewrite serves `/shop/index.html`. `mckenziecarlile.com/shop/` also works directly, which is useful for previewing before DNS is set up.
+Once DNS propagates, `shop.mckenziecarlile.com` resolves to this project and the middleware rewrites `/` to `/shop`. `mckenziecarlile.vercel.app/shop` (the project's default Vercel domain) also works directly, which is useful for previewing before DNS is set up — the apex `mckenziecarlile.com` currently points elsewhere (see below), so `mckenziecarlile.com/shop/` won't work as a preview.
 
 ### First deploy (one time)
 
@@ -158,6 +160,8 @@ mckenziecarlile/
 ├── assets/
 │   ├── style.css                     All styles + token system
 │   └── images/                       Hero and report photos
+├── middleware.js                     Host-based routing for shop.mckenziecarlile.com
+├── package.json                      Declares @vercel/functions for middleware.js
 ├── vercel.json                       Vercel routing config
 └── DESIGN-SYSTEM.md                  This file
 ```
