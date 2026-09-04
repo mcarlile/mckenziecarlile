@@ -770,10 +770,23 @@ footer span {
 }
 .case-back:hover { color: var(--color-text-primary); }
 
+/* ── SHOP (listing gallery) ── */
+.listing-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-gap);
+  margin: 24px 0 48px;
+}
+
+.listing-gallery .case-placeholder-img {
+  margin: 0;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .field-grid,
-  .reports-grid {
+  .reports-grid,
+  .listing-gallery {
     grid-template-columns: 1fr;
   }
 
