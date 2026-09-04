@@ -123,18 +123,21 @@ a { color: inherit; }
   padding: 4px 12px;
 }
 
-.hero-photo {
+.hero-carousel {
   margin-top: 48px;
-  border: 1px solid var(--border);
-  overflow: hidden;
 }
 
-.hero-photo img {
-  width: 100%;
+.hero-carousel img {
   height: clamp(18rem, 52vw, 34rem);
-  object-fit: cover;
-  display: block;
 }
+
+.hero-carousel .carousel-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+}
+.hero-carousel .carousel-btn.prev { left: 16px; }
+.hero-carousel .carousel-btn.next { right: 16px; }
 
 figcaption {
   font-size: 10px;
