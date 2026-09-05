@@ -94,7 +94,7 @@ a { color: inherit; }
   font-size: 2.25rem;
   color: var(--sale);
   background: var(--sale-bg);
-  padding: 4px 12px;
+  padding: 8px 12px;
 }
 
 .hero-carousel {
