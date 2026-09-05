@@ -37,32 +37,6 @@ a { color: inherit; }
   padding: 0 24px;
 }
 
-/* ── NAV ── */
-.shop-nav {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  border-bottom: 1px solid var(--border);
-  background: rgba(244, 242, 236, 0.85);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.shop-nav .wrap {
-  height: 56px;
-  display: flex;
-  align-items: center;
-}
-
-.shop-nav a {
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-.shop-nav a:hover { opacity: 0.6; }
-
 /* ── HERO ── */
 .hero {
   padding: 40px 0 48px;
