@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.legend {
+  position: absolute;
+  left: 20px;
+  bottom: 24px;
+  z-index: 15;
+  background: rgba(17, 20, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 200px;
+  backdrop-filter: blur(6px);
+}
+
+.legend-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #9aa4ad;
+  margin-bottom: 6px;
+}
+
+.legend-bar {
+  height: 8px;
+  border-radius: 4px;
+}
+
+.legend-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 11px;
+  color: #e6e9ec;
+  font-variant-numeric: tabular-nums;
+}
