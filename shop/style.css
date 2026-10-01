@@ -276,6 +276,11 @@ figcaption {
   display: block;
 }
 
+/* taller crop for portrait-orientation photos, so detail isn't lost */
+.feature-photo.feature-photo-tall img {
+  height: 28rem;
+}
+
 /* ── CONTACT ── */
 .contact-section {
   border-top: 1px solid var(--border);
