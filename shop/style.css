@@ -101,8 +101,8 @@ a { color: inherit; }
   margin-top: 48px;
 }
 
-.hero-carousel img {
-  height: clamp(18rem, 52vw, 34rem);
+.carousel.hero-carousel img {
+  height: clamp(26rem, 70vw, 50rem);
 }
 
 .hero-carousel .carousel-btn {

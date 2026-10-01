@@ -29,26 +29,23 @@
   </div>
 
   <div class="carousel hero-carousel" data-carousel>
-    <div class="carousel-slide active" data-caption="Fig. 01 — Sunrise on the rim">
-      <img src="/assets/images/shop/hero-canyon-overlook.jpg" alt="The Pilgrim camper parked at a canyon overlook at sunset with bikes loaded" loading="eager" decoding="async">
+    <div class="carousel-slide active">
+      <img src="/assets/images/shop/aspen-grove-for-sale.jpg" alt="The Pilgrim camper parked among golden aspens with a For Sale sign" loading="eager" decoding="async">
     </div>
-    <div class="carousel-slide" data-caption="Fig. 02 — Off-grid on a forest two-track">
+    <div class="carousel-slide">
+      <img src="/assets/images/shop/hero-canyon-overlook.jpg" alt="The Pilgrim camper parked at a canyon overlook at sunset with bikes loaded" loading="lazy" decoding="async">
+    </div>
+    <div class="carousel-slide">
       <img src="/assets/images/shop/forest-two-track.jpg" alt="Off-grid on a forest two-track" loading="lazy" decoding="async">
     </div>
-    <div class="carousel-slide" data-caption="Fig. 03 — Climbing a Sierra fire road">
+    <div class="carousel-slide">
       <img src="/assets/images/shop/sierra-fire-road.jpg" alt="Climbing a Sierra fire road" loading="lazy" decoding="async">
     </div>
-    <div class="carousel-slide" data-caption="Fig. 04 — Dispersed camp at alpine dusk">
+    <div class="carousel-slide">
       <img src="/assets/images/shop/alpine-dusk-camp.jpg" alt="Dispersed camp at alpine dusk" loading="lazy" decoding="async">
     </div>
     <button type="button" class="carousel-btn prev" aria-label="Previous photo">‹</button>
     <button type="button" class="carousel-btn next" aria-label="Next photo">›</button>
-    <figcaption class="carousel-caption">
-      <span data-caption-text>Fig. 01 — Sunrise on the rim</span>
-      <span class="carousel-dots">
-        <i class="active"></i><i></i><i></i><i></i>
-      </span>
-    </figcaption>
   </div>
 </header>
 
@@ -165,11 +162,11 @@
 
     function show(next) {
       slides[i].classList.remove('active');
-      dots[i].classList.remove('active');
+      if (dots[i]) dots[i].classList.remove('active');
       i = (next + slides.length) % slides.length;
       slides[i].classList.add('active');
-      dots[i].classList.add('active');
-      caption.textContent = slides[i].dataset.caption || slides[i].querySelector('img').alt;
+      if (dots[i]) dots[i].classList.add('active');
+      if (caption) caption.textContent = slides[i].dataset.caption || slides[i].querySelector('img').alt;
     }
 
     carousel.querySelector('.prev').addEventListener('click', () => show(i - 1));
